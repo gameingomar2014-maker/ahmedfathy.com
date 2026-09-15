@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta name="google-site-verification" content="-PPO9wghdB9b97ifqJJTIeLKO3YRmIVPipizMX0k8a8" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1d5140">
@@ -95,7 +94,6 @@ svg.lucide{width:1.05em;height:1.05em;flex:none;vertical-align:-.15em}
   color:var(--gold);padding:6px 13px;border-radius:99px;font-weight:700;font-size:14px}
 .uchip{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1.5px solid var(--line2);
   padding:6px 13px;border-radius:99px;font-weight:600;font-size:13.5px;transition:.15s}
-.uchip:hover{border-color:var(--ink)}
 .rtag{font-style:normal;font-size:10.5px;padding:2px 8px;border-radius:99px;background:var(--paper2);color:var(--ink2);font-weight:700}
 .rtag.adm{background:var(--green);color:var(--paper)}
 .burger{display:none;width:42px;height:42px;border:1.5px solid var(--line2);border-radius:10px;place-items:center;background:var(--card)}
@@ -237,7 +235,7 @@ section.block{padding:64px 0}
 .tbl th{font-family:'Changa';font-size:13px;font-weight:700;text-align:right;color:var(--ink2);padding:13px 16px;border-bottom:1.5px solid var(--line2);background:var(--paper2);white-space:nowrap}
 .tbl td{padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
 .tbl tr:last-child td{border-bottom:none}
-.tbl .acts{display:flex;gap:7px}
+.tbl .acts{display:flex;gap:7px;flex-wrap:wrap}
 .mini-thumb{width:52px;height:40px;object-fit:cover;border-radius:7px;border:1.5px solid var(--line2);cursor:zoom-in;display:block;background:var(--paper2)}
 .code-pill{font-family:'Changa';font-weight:700;letter-spacing:1px;direction:ltr;display:inline-block;background:var(--paper2);border:1.5px dashed var(--line2);border-radius:8px;padding:2px 10px;font-size:13px}
 
@@ -602,7 +600,7 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
       <div class="sec-h"><span class="num">٠١ /</span><h2>إزاي تبدأ؟</h2><span class="rule"></span></div>
       <div class="steps">
         <div class="step"><span class="snum">٠١</span><div><h3>أنشئ حسابك</h3><p>سجّل كطالب في أقل من دقيقة — حسابان كحد أقصى لكل جهاز، وتقدر تحذف حسابك في أي وقت.</p></div></div>
-        <div class="step"><span class="snum">٠٢</span><div><h3>ارفع إثبات الدفع</h3><p>اختار المادة، ارفع صورة التحويل (أي حجم)، والإدارة تراجع وتقبل. لأي مشكلة: 01147414419.</p></div></div>
+        <div class="step"><span class="snum">٠٢</span><div><h3>ابعت إثبات الدفع</h3><p>اختار المادة، اكتب المبلغ، وارفع صورة التحويل (كلها مطلوبة) — والإدارة تراجع وتقبل. لأي مشكلة: 01147414419.</p></div></div>
         <div class="step"><span class="snum">٠٣</span><div><h3>فعّل كود الحصة</h3><p>الحصص المحمية ليها كود سري بيوصلك بعد قبول الدفعة — تدخّله مرة واحدة والحصة تفضل مفتوحة.</p></div></div>
         <div class="step"><span class="snum">٠٤</span><div><h3 id="step4-h">امتحن واختبر نفسك</h3><p id="step4-p">امتحانات بمؤقّت تحت مراقبة ذكية تمنع الغش، ومراجعة كاملة بعد التسليم. وعندك مساعد ذكي جنبك.</p></div></div>
       </div>
@@ -642,7 +640,7 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
   <section id="view-videos" class="view">
     <div class="wrap" style="padding-bottom:60px">
       <div class="page-head">
-        <div><h2>الحصص المسجّلة</h2><div class="sub">الحصص المحمية بتفتح بالكود الخاص بيها</div></div>
+        <div><h2>الحصص المسجّلة</h2><div class="sub">الحصص المحمية بتفتح بالكود بعد قبول الدفعة</div></div>
         <div class="searchbox"><i data-lucide="search"></i><input id="v-search" placeholder="ابحث بالعنوان أو المادة…" oninput="vState.q=this.value;debV()"></div>
       </div>
       <div class="filters" id="v-filters"></div>
@@ -664,17 +662,17 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
   <section id="view-payments" class="view">
     <div class="wrap" style="padding-bottom:60px">
       <div class="page-head">
-        <div><h2>دفعاتي</h2><div class="sub">ابعت صورة التحويل واسم المادة — وبعد القبول هتوصلك الأكواد</div></div>
+        <div><h2>دفعاتي</h2><div class="sub">اكتب اسم المادة والمبلغ وارفع صورة التحويل — كلها مطلوبة</div></div>
       </div>
       <div class="pay-grid">
         <div class="pcard">
           <h3><i data-lucide="wallet"></i> إرسال دفعة جديدة</h3>
           <form class="form" onsubmit="return submitPayment(event)">
             <label>اسم المادة / الحصة *<input id="pay-subj" list="dl-subj" required placeholder="مثال: رياضيات"></label>
-            <label>المبلغ (اختياري)<input id="pay-amt" type="number" min="0" inputmode="numeric" placeholder="مثال: 150"></label>
+            <label>المبلغ المدفوع (جنيه) *<input id="pay-amt" type="number" min="1" required inputmode="numeric" placeholder="مثال: 150"></label>
             <label>صورة إثبات التحويل *<input id="pay-img" type="file" accept="image/*" required onchange="payPreview(this)"></label>
             <div id="pay-prev"></div>
-            <div class="form-note"><i data-lucide="info"></i> بعد قبول الدفعة، أكواد حصص المادة تظهر عندك مباشرة. لأي مشكلة: <b dir="ltr">+20 11 47414419</b></div>
+            <div class="form-note"><i data-lucide="info"></i> لازم تكتب اسم المادة والمبلغ وترفع صورة التحويل — بدونهم مش هتتبعت الدفعة. لأي مشكلة: <b dir="ltr">+20 11 47414419</b></div>
             <button class="btn green w100"><i data-lucide="upload"></i> إرسال الدفعة</button>
           </form>
         </div>
@@ -728,7 +726,7 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
   <div class="ai-msgs" id="ai-msgs"></div>
   <div class="ai-chips" id="ai-chips"></div>
   <div class="ai-in">
-    <input id="ai-input" placeholder="اكتب سؤالك… أو عملية حسابية أحلها لك" onkeydown="if(event.key==='Enter')aiUserSend()">
+    <input id="ai-input" placeholder="اكتب سؤالك…" onkeydown="if(event.key==='Enter')aiUserSend()">
     <button class="ai-send" onclick="aiUserSend()"><i data-lucide="send"></i></button>
   </div>
 </div>
@@ -753,7 +751,6 @@ function mkDeb(fn, ms){
   return function(){ if(t) clearTimeout(t); t = setTimeout(fn, ms || 160); };
 }
 
-/* دمج نداءات lucide في استدعاء واحد لكل إطار — ضد التجميد */
 var iconsQueued = false;
 function icons(){
   if(iconsQueued) return;
@@ -773,7 +770,8 @@ var SUBJ_COLORS = {'رياضيات':'#1d5140','فيزياء':'#8a4b22','كيمي
 function subjColor(s){ return SUBJ_COLORS[s] || '#3a352a'; }
 var PLACEHOLDER = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="90"><rect width="120" height="90" fill="#ddd5c0"/><text x="60" y="52" font-size="30" text-anchor="middle" fill="#a89f85">?</text></svg>');
 
-var DATA_VERSION = 'v9-banna-hidden-admin';
+/* مسح كل البيانات القديمة — نسخة جديدة = مسح تلقائي مرة واحدة */
+var DATA_VERSION = 'v10-banna-prices-clean';
 function autoWipe(){
   try{
     if(localStorage.getItem('afth_dataver') !== DATA_VERSION){
@@ -971,7 +969,7 @@ function confirmDlg(title, msg, okText, danger){
   });
 }
 
-/* ================= المصادقة — الحقول فاضية دايمًا ================= */
+/* ================= المصادقة ================= */
 function openLogin(mode){
   closeAllModals();
   var isAdmin = mode === 'admin';
@@ -1270,14 +1268,22 @@ function videoRowHTML(v, opt){
     hint = '<span class="hintline">دفعتك مقبولة</span>';
   } else {
     btn = '<button class="btn sm" onclick="playVideo(\''+v.id+'\')"><i data-lucide="key-round"></i> دخول بكود</button>';
-    hint = '<span class="hintline">الكود بيوصلك بعد قبول الدفعة</span>';
+    hint = '<span class="hintline">ادفع وابعت إيصال الحصة عشان الكود يوصلك</span>';
+  }
+  /* شريحة السعر */
+  var priceChip = '';
+  if(typeof v.price === 'number' && v.price > 0){
+    priceChip = '<span class="chip pend"><i data-lucide="tag"></i> '+v.price+' ج</span>';
+  } else {
+    priceChip = '<span class="chip free">مجانًا</span>';
   }
   return '<article class="vrow '+(opt.feat ? 'feat' : '')+'">'+
     thumbHTML(v, a === 'guest' ? 'guest' : a === 'locked' ? 'locked' : null)+
     '<div class="vinfo">'+
     '<div class="vmeta">'+
     '<span class="chip sj">'+esc(v.subject)+'</span>'+
-    (v.code ? '<span class="chip cd"><i data-lucide="key-round"></i> محمية بكود</span>' : '<span class="chip free">مفتوحة</span>')+
+    priceChip+
+    (v.code ? '<span class="chip cd"><i data-lucide="key-round"></i> محمية بكود</span>' : '')+
     (v.attachKey ? '<span class="chip"><i data-lucide="paperclip"></i> مرفق</span>' : '')+
     '<span style="color:var(--ink2)">'+fmtDate(v.created)+'</span>'+
     '</div>'+
@@ -1354,9 +1360,12 @@ function openPlayer(v){
   , 'player-m');
 }
 function openCodeModal(v){
+  var priceLine = (typeof v.price === 'number' && v.price > 0)
+    ? ' سعر هذه الحصة: <b>'+v.price+' جنيه</b>.'
+    : '';
   var b = openModal(
     '<div class="m-head"><h3>حصة محمية بكود</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div>'+
-    '<p class="m-msg">الحصة «'+esc(v.title)+'» محتاجة كود التفعيل. الكود بيوصلك بعد قبول الدفعة — وتدخّله مرة واحدة بس.</p>'+
+    '<p class="m-msg">الحصة «'+esc(v.title)+'» محتاجة كود التفعيل.'+priceLine+' حوّل المبلغ على: <b dir="ltr">+20 11 47414419</b>، وابعت الدفعة من صفحة «الدفعات» باسم «<b>'+esc(v.subject)+'</b>»، وبعد قبول الإدارة الكود بيوصلك تلقائيًا هنا.</p>'+
     '<form id="cf" class="form">'+
     '<label>كود الحصة<input id="code-in" required autocomplete="off" placeholder="مثال: MATH7X" style="direction:ltr;text-align:center;font-family:Changa;letter-spacing:3px;font-size:18px"></label>'+
     '<button class="btn green w100" type="submit"><i data-lucide="key-round"></i> تحقّق وفعّل</button>'+
@@ -1713,13 +1722,14 @@ function submitPayment(e){
   var u = me(); if(!u || u.role !== 'student') return false;
   var subj = qs('#pay-subj').value.trim();
   var amt  = qs('#pay-amt').value;
-  if(!subj){ toast('اكتب اسم المادة','err'); return false; }
+  if(!subj){ toast('اكتب اسم المادة أو الحصة','err'); return false; }
+  if(!amt || +amt <= 0){ toast('اكتب المبلغ المدفوع','err'); return false; }
   if(!payImgBlob){ toast('ارفع صورة التحويل أولًا','err'); return false; }
   var id = uid();
   payments.unshift({ id: id, uid: u.id, uname: u.name, subject: subj,
-    amount: amt || '', mediaKey: 'pay_' + id, status: 'pending', date: Date.now() });
+    amount: amt, mediaKey: 'pay_' + id, status: 'pending', date: Date.now() });
   IDB.put('pay_' + id, payImgBlob).then(function(){
-    payImgBlob = null; persist(); toast('تم إرسال الدفعة — بانتظار المراجعة'); renderPayments();
+    payImgBlob = null; persist(); toast('تم إرسال الدفعة — بانتظار مراجعة الإدارة'); renderPayments();
   }).catch(function(){
     toast('فشل حفظ الصورة — جرّب صورة أصغر','err');
     payments = payments.filter(function(p){ return p.id !== id; });
@@ -1737,7 +1747,7 @@ function renderPayments(){
     ? '<div class="pcard" style="padding:10px 22px">'+mine.map(function(p){
       return '<div class="my-pay">'+
         '<img class="mini-thumb" data-media="'+(p.mediaKey || '')+'" src="'+PLACEHOLDER+'" alt="" onclick="openImage(\''+p.id+'\')">'+
-        '<div class="info"><b>'+esc(p.subject)+'</b><span>'+fmtDate(p.date)+(p.amount ? ' · '+esc(p.amount)+' ج' : '')+'</span></div>'+
+        '<div class="info"><b>'+esc(p.subject)+'</b><span>'+fmtDate(p.date)+' · '+esc(p.amount)+' ج</span></div>'+
         stChip(p.status)+'</div>';
     }).join('')+'</div>'
     : emptyHTML('wallet','لسه مابعتّش أي دفعة');
@@ -1753,7 +1763,7 @@ function openImage(pid){
     '<div style="margin-top:16px">'+
     '<div class="kv"><span>الطالب</span><b>'+esc(p.uname)+'</b></div>'+
     '<div class="kv"><span>المادة</span><b>'+esc(p.subject)+'</b></div>'+
-    (p.amount ? '<div class="kv"><span>المبلغ</span><b>'+esc(p.amount)+' ج</b></div>' : '')+
+    '<div class="kv"><span>المبلغ</span><b>'+esc(p.amount)+' ج</b></div>'+
     '<div class="kv"><span>التاريخ</span><b>'+fmtFull(p.date)+'</b></div>'+
     '</div>', 'wide');
   mountMedia();
@@ -1827,9 +1837,10 @@ function renderTeach(){
     '</div></div>'+
     '<div class="adm-head-row"><h3>حصصي ('+myVids.length+')</h3></div>';
   html += myVids.length
-    ? '<div class="tscroll"><table class="tbl"><tr><th>الحصة</th><th>المادة</th><th>الكود</th><th>النشر</th><th></th></tr>'+
+    ? '<div class="tscroll"><table class="tbl"><tr><th>الحصة</th><th>المادة</th><th>السعر</th><th>الكود</th><th>النشر</th><th></th></tr>'+
       myVids.map(function(v){
         return '<tr><td><b>'+esc(v.title)+'</b></td><td>'+esc(v.subject)+'</td>'+
+        '<td>'+(v.price > 0 ? v.price+' ج' : 'مجانًا')+'</td>'+
         '<td>'+(v.code ? '<span class="code-pill">'+esc(v.code)+'</span>' : '—')+'</td><td>'+fmtDate(v.created)+'</td>'+
         '<td><div class="acts"><button class="ico-btn danger" onclick="delVideo(\''+v.id+'\',renderTeach)"><i data-lucide="trash-2"></i></button></div></td></tr>';
       }).join('')+'</table></div>'
@@ -1901,11 +1912,14 @@ function renderAdminTab(){
     if(!videos.length && !exams.length && !students.length && !payments.length){
       html += emptyHTML('rocket','المنصة فاضية وجاهزة — ابدأ بإضافة أول حصة');
     } else if(pendPays.length){
-      html += '<div class="adm-head-row"><h3>أحدث الدفعات المعلّقة</h3></div>';
-      html += '<div class="tscroll"><table class="tbl"><tr><th>الطالب</th><th>المادة</th><th>التاريخ</th><th>إجراءات</th></tr>'+
+      html += '<div class="adm-head-row"><h3>أحدث الدفعات المعلّقة — شوف صورة التحويل قبل القبول</h3></div>';
+      html += '<div class="tscroll"><table class="tbl"><tr><th>الصورة</th><th>الطالب</th><th>المادة</th><th>المبلغ</th><th>التاريخ</th><th>إجراءات</th></tr>'+
         pendPays.slice(0,4).map(function(p){
-          return '<tr><td><b>'+esc(p.uname)+'</b></td><td>'+esc(p.subject)+'</td><td>'+fmtFull(p.date)+'</td>'+
+          return '<tr>'+
+          '<td><img class="mini-thumb" data-media="'+(p.mediaKey || '')+'" src="'+PLACEHOLDER+'" onclick="openImage(\''+p.id+'\')" alt="تحويل"></td>'+
+          '<td><b>'+esc(p.uname)+'</b></td><td>'+esc(p.subject)+'</td><td>'+esc(p.amount)+' ج</td><td>'+fmtFull(p.date)+'</td>'+
           '<td><div class="acts">'+
+          '<button class="btn ghost sm" onclick="openImage(\''+p.id+'\')"><i data-lucide="eye"></i> عرض الصورة</button>'+
           '<button class="btn green sm" onclick="approvePay(\''+p.id+'\')"><i data-lucide="check"></i> قبول</button>'+
           '<button class="btn red sm" onclick="rejectPay(\''+p.id+'\')"><i data-lucide="x"></i> رفض</button>'+
           '</div></td></tr>';
@@ -1970,19 +1984,20 @@ function renderAdminTab(){
       '<div class="adm-head-row"><h3>إدارة الحصص ('+list.length+')</h3>'+
       '<button class="btn green sm" onclick="openVideoForm(function(){adminTab=\'videos\';renderAdmin();})"><i data-lucide="plus"></i> إضافة حصة</button></div>';
     html += list.length
-      ? '<div class="tscroll"><table class="tbl"><tr><th>الحصة</th><th>المادة</th><th>الكود</th><th>الوسائط</th><th>الناشر</th><th></th></tr>'+
+      ? '<div class="tscroll"><table class="tbl"><tr><th>الحصة</th><th>المادة</th><th>السعر</th><th>الكود</th><th>الوسائط</th><th>الناشر</th><th></th></tr>'+
         list.map(function(v){
           var a = null;
           for(var i = 0; i < users.length; i++){ if(users[i].id === v.author){ a = users[i]; break; } }
           var media = [];
-          if(v.mediaKey) media.push('فيديو');
+          if(v.mediaKey) media.push('فيديو مرفوع');
           if(v.coverKey) media.push('غلاف');
           if(v.attachKey) media.push('مرفق');
           return '<tr>'+
             '<td><b>'+esc(v.title)+'</b></td>'+
             '<td>'+esc(v.subject)+'</td>'+
+            '<td>'+(v.price > 0 ? '<b style="color:var(--gold)">'+v.price+' ج</b>' : 'مجانًا')+'</td>'+
             '<td>'+(v.code ? '<span class="code-pill">'+esc(v.code)+'</span>' : 'مفتوحة')+'</td>'+
-            '<td>'+(media.length ? media.join(' + ') : 'رابط')+'</td>'+
+            '<td>'+(media.length ? media.join(' + ') : 'رابط يوتيوب/MP4')+'</td>'+
             '<td>'+(a ? esc(a.name) : '—')+'</td>'+
             '<td><div class="acts"><button class="ico-btn danger" onclick="delVideo(\''+v.id+'\',function(){adminTab=\'videos\';renderAdmin();})"><i data-lucide="trash-2"></i></button></div></td>'+
             '</tr>';
@@ -2040,9 +2055,10 @@ function renderPayTable(){
       list.map(function(p){
         return '<tr>'+
         '<td><img class="mini-thumb" data-media="'+(p.mediaKey || '')+'" src="'+PLACEHOLDER+'" onclick="openImage(\''+p.id+'\')" alt="تحويل"></td>'+
-        '<td><b>'+esc(p.uname)+'</b></td><td>'+esc(p.subject)+'</td><td>'+(p.amount ? esc(p.amount)+' ج' : '—')+'</td>'+
+        '<td><b>'+esc(p.uname)+'</b></td><td>'+esc(p.subject)+'</td><td><b>'+esc(p.amount)+' ج</b></td>'+
         '<td>'+fmtFull(p.date)+'</td><td>'+st(p.status)+'</td>'+
         '<td><div class="acts">'+
+        '<button class="btn ghost sm" onclick="openImage(\''+p.id+'\')"><i data-lucide="eye"></i> الصورة</button>'+
         (p.status === 'pending'
           ? '<button class="btn green sm" onclick="approvePay(\''+p.id+'\')"><i data-lucide="check"></i></button>'+
             '<button class="btn red sm" onclick="rejectPay(\''+p.id+'\')"><i data-lucide="x"></i></button>'
@@ -2105,7 +2121,7 @@ function approvePay(id){
   for(var j = 0; j < users.length; j++){ if(users[j].id === p.uid){ u = users[j]; break; } }
   if(u){ u.paid = u.paid || []; if(u.paid.indexOf(p.subject) === -1) u.paid.push(p.subject); }
   persist(); renderNav();
-  toast('تم قبول دفعة ' + p.uname);
+  toast('تم قبول دفعة ' + p.uname + ' — كود حصص «' + p.subject + '» بقى ظاهر له');
   closeModal(); renderAdminTab();
 }
 function rejectPay(id){
@@ -2191,7 +2207,7 @@ function delExam(id, cb){
   });
 }
 
-/* ================= إضافة حصة ================= */
+/* ================= إضافة حصة (رابط يوتيوب أو ملف + سعر) ================= */
 function bindFileLabel(inpId, nameId, defHTML){
   var inp = qs('#' + inpId), lab = qs('#' + nameId);
   if(!inp || !lab) return;
@@ -2213,25 +2229,27 @@ function openVideoForm(cb){
     '<form id="vf" class="form">'+
     '<label>عنوان الحصة *<input name="title" required placeholder="مثال: اشتقاق الدوال"></label>'+
     '<label>المادة *<input name="subject" required list="dl-subj" placeholder="مثال: رياضيات"></label>'+
+    '<label>سعر الحصة (جنيه) *<input name="price" type="number" min="0" required inputmode="numeric" placeholder="مثال: 150"></label>'+
     '<label>وصف مختصر<textarea name="desc" rows="2"></textarea></label>'+
     '<div class="radio-row">'+
     '<label class="radio-card"><input type="radio" name="vsrc" value="url" checked onchange="vfSrc(\'url\')">'+
-    '<b><i data-lucide="link"></i> رابط فيديو</b><small>YouTube أو MP4</small></label>'+
+    '<b><i data-lucide="link"></i> رابط يوتيوب / MP4</b><small>الصق رابط الفيديو</small></label>'+
     '<label class="radio-card"><input type="radio" name="vsrc" value="file" onchange="vfSrc(\'file\')">'+
-    '<b><i data-lucide="hard-drive-upload"></i> ملف من جهازك</b><small>أي حجم</small></label>'+
+    '<b><i data-lucide="hard-drive-upload"></i> رفع ملف فيديو</b><small>من جهازك — أي حجم</small></label>'+
     '</div>'+
-    '<label id="vf-url-field" style="display:flex">رابط الفيديو<input name="url" dir="ltr" style="text-align:left" placeholder="https://youtu.be/..."></label>'+
+    '<label id="vf-url-field" style="display:flex">رابط الفيديو (يوتيوب أو MP4) *<input name="url" dir="ltr" style="text-align:left" placeholder="https://youtu.be/..."></label>'+
     '<label id="vf-file-field" class="file-drop" style="display:none">'+
     '<input type="file" id="vf-file" accept="video/*">'+
-    '<i data-lucide="file-video"></i><span class="fn" id="vf-file-name">اختر ملف فيديو<small>MP4 / WebM — أي حجم</small></span></label>'+
+    '<i data-lucide="file-video"></i><span class="fn" id="vf-file-name">اختر ملف فيديو من جهازك<small>MP4 / WebM — أي حجم</small></span></label>'+
     '<label class="file-drop"><input type="file" id="vf-cover" accept="image/*">'+
     '<i data-lucide="image"></i><span class="fn" id="vf-cover-name">صورة غلاف (اختياري)<small>أي مقاس</small></span></label>'+
     '<label class="file-drop"><input type="file" id="vf-att" accept=".pdf,.doc,.docx,.ppt,.pptx,.zip">'+
     '<i data-lucide="paperclip"></i><span class="fn" id="vf-att-name">ملف مرفق (اختياري)<small>PDF / Word / ZIP</small></span></label>'+
     '<label>كود الحصة (اختياري)<input name="code" dir="ltr" style="text-align:left" placeholder="فارغ = مفتوحة للجميع"></label>'+
+    '<div class="form-note"><i data-lucide="tag"></i> السعر اللي تكتبه هيظهر للطالب جنب الحصة، وهو لازم يكتب نفس المبلغ وقت إرسال الدفعة.</div>'+
     '<button class="btn green w100" type="submit"><i data-lucide="upload"></i> نشر الحصة</button>'+
     '</form>', 'wide');
-  bindFileLabel('vf-file','vf-file-name','اختر ملف فيديو<small>MP4 / WebM — أي حجم</small>');
+  bindFileLabel('vf-file','vf-file-name','اختر ملف فيديو من جهازك<small>MP4 / WebM — أي حجم</small>');
   bindFileLabel('vf-cover','vf-cover-name','صورة غلاف (اختياري)<small>أي مقاس</small>');
   bindFileLabel('vf-att','vf-att-name','ملف مرفق (اختياري)<small>PDF / Word / ZIP</small>');
   b.querySelector('#vf').onsubmit = function(e){
@@ -2243,11 +2261,13 @@ function openVideoForm(cb){
     var vidFile = qs('#vf-file').files[0];
     var coverF  = qs('#vf-cover').files[0];
     var attF    = qs('#vf-att').files[0];
+    var price   = Math.max(0, +fd.get('price') || 0);
     if(mode === 'file' && !vidFile){ toast('اختر ملف الفيديو','err'); return; }
     if(mode === 'url' && !url){ toast('ضع رابط الفيديو','err'); return; }
     var id = uid();
     var rec = { id: id, author: u.id, created: Date.now(),
       title: String(fd.get('title') || '').trim(), subject: String(fd.get('subject') || '').trim(),
+      price: price,
       url: mode === 'url' ? url : '', desc: String(fd.get('desc') || '').trim(),
       code: String(fd.get('code') || '').trim().toUpperCase(),
       storage: mode === 'file' ? 'idb' : 'url' };
@@ -2351,7 +2371,7 @@ function emptyHTML(icon, txt){
   return '<div class="empty"><i data-lucide="'+icon+'"></i><p>'+esc(txt)+'</p></div>';
 }
 
-/* ================= المساعد الذكي ================= */
+/* ================= المساعد الذكي — بدون أي معادلات أو قوانين ================= */
 var AI_INTENTS = [
   {k:['كوين عندي','رصيدي','كم كوين','كام كوين'], a:function(){
     if(!coinsOn()) return 'نظام الكوينز معطّل حاليًا من الإدارة.';
@@ -2367,16 +2387,16 @@ var AI_INTENTS = [
   }},
   {k:['سلام','هلا','أهلا','اهلا','مرحبا','هاي','ازيك','إزيك','صباح','مساء'], a:function(){
     var u = me();
-    return 'أهلاً'+(u ? ' يا '+u.name.split(' ')[0] : '')+' أنا هنا لخدمتك.\nاسألني عن الدفع، الكود، أو اطلب نصيحة مذاكرة — ولو كتبت عملية حسابية هحلها فورًا.';
+    return 'أهلاً'+(u ? ' يا '+u.name.split(' ')[0] : '')+' أنا هنا لخدمتك.\nأساعدك في تنظيم مذاكرتك وأسلوب الحل — والحصص والامتحانات عند مستر أحمد هي مصدر القوانين والحلول.\nاطلب نصيحة مذاكرة أو اسأل عن الدفع والكود.';
   }},
   {k:['حساب جديد','اعمل حساب','إنشاء حساب','انشاء حساب','سجل','تسجيل'], a:
     'خطوات إنشاء الحساب:\n1. اضغط زر «حساب جديد».\n2. اكتب اسمك وبريدك وكلمة مرور (6 أحرف على الأقل).\n3. اختار «طالب» واضغط إنشاء.\nمهم: الحسابين كحد أقصى على كل جهاز.'},
   {k:['مش قادر ادخل','مش عارف ادخل','كلمة المرور','نسيت الباس'], a:
     'لو مش قادر تسجّل دخول:\n• تأكد من البريد وكلمة المرور (بدون مسافات).\n• لو نسيت كلمة المرور، كلمنا: 01147414419\n• حساب الإدارة بيدخل من زر «دخول الإدارة» الأخضر.'},
-  {k:['دفع','ادفع','أدفع','تحويل','فيزا','محفظة','فلوس','رسوم','اشتراك','ازاي ادفع'], a:
-    'طريقة الدفع:\n1. حوّل المبلغ على رقمنا: 01147414419.\n2. سجّل دخولك وروح لصفحة «الدفعات».\n3. اكتب اسم المادة وارفع صورة إيصال التحويل.\n4. بعد قبول الإدارة، أكواد حصص المادة تظهر لك تلقائيًا.\nلأي مشكلة اتصل: +20 11 47414419'},
+  {k:['دفع','ادفع','أدفع','تحويل','فيزا','محفظة','فلوس','رسوم','اشتراك','ازاي ادفع','سعر','السعر','كام'], a:
+    'طريقة الدفع:\n1. شوف سعر الحصة مكتوب جنبها في صفحة الحصص.\n2. حوّل المبلغ على رقمنا: 01147414419.\n3. سجّل دخولك وروح لصفحة «الدفعات».\n4. اكتب اسم المادة، والمبلغ اللي دفعته، وارفع صورة إيصال التحويل (الثلاثة مطلوبين).\n5. بعد قبول الإدارة، كود الحصة يظهر لك تلقائيًا.\nلأي مشكلة اتصل: +20 11 47414419'},
   {k:['كود','الكود','تفعيل','افعل','أفعل','محمية'], a:
-    'نظام الأكواد:\n• الحصص المحمية ليها كود سري.\n• الكود بيوصلك تلقائيًا بعد قبول دفعتك — تلاقيه في صفحة الحصص.\n• تدخّله مرة واحدة والحصة تفضل مفتوحة لحسابك للأبد.'},
+    'نظام الأكواد:\n• الحصص المحمية ليها كود سري وسعر مكتوب جنبها.\n• ادفع، وابعت الدفعة بالمبلغ والصورة واسم المادة.\n• بعد قبول الإدارة الكود يظهر لك تلقائيًا — تدخّله مرة واحدة والحصة تفضل مفتوحة للأبد.'},
   {k:['كوينز','كوين','عملات','نقاط','مكافأة'], a:function(){
     if(!coinsOn()) return 'نظام الكوينز معطّل حاليًا من إدارة المنصة.';
     return 'نظام الكوينز:\n• كل امتحان له مكافأة.\n• بتُحسب من أول محاولة: كل ما درجتك أعلى، كوينز أكتر.\n• رصيدك بيظهر في الهيدر وصفحة «حسابي».';
@@ -2384,39 +2404,39 @@ var AI_INTENTS = [
   {k:['مراقبة','غش','نسخ','مخالفة','بيمنع','بيكشف'], a:
     'نظام المراقبة:\n• الامتحان بيفتح ملء الشاشة — الخروج مخالفة.\n• النسخ واللصق والكليك يمين ممنوع.\n• مغادرة التبويب بتتكشف فورًا.\n• 3 مخالفات = إلغاء الامتحان.\nنصيحة: اقفل كل التطبيقات وامتحن في مكان هادي.'},
   {k:['ذكاء اصطناعي','chatgpt','شات جي بي تي','جي بي تي'], a:
-    'هل المنصة بتكشف الذكاء الاصطناعي؟\nأيوه — التحليل بيرصد الإجابات السريعة غير الطبيعية مع درجات عالية، وبيتسجل «مؤشر مرتفع» في تقارير الإدارة.\nذاكر بنفسك — وأنا موجود أساعدك تفهم.'},
+    'المنصة بترصد الإجابات السريعة غير الطبيعية مع درجات عالية، وبيتسجل «مؤشر مرتفع» في تقارير الإدارة.\nوأنا تصميمي للمذاكرة والتنظيم بس — مش بهيل في حل الامتحانات.\nذاكر من حصص مستر أحمد وافهم بنفسك، ودي أضمن طريقة للنجاح.'},
   {k:['قبل الامتحان','ليلة الامتحان','يوم الامتحان','مراجعة نهائية'], a:
-    'قائمة ما قبل الامتحان:\n1. راجع الملخصات.\n2. حل امتحانات سابقة بمؤقّت.\n3. نام 7-8 ساعات.\n4. فطار خفيف ووصل بدري.\n5. ابدأ بالأسئلة اللي عارفها.'},
+    'قائمة ما قبل الامتحان:\n1. راجع ملخصاتك وحصص المادة.\n2. حل امتحانات سابقة بمؤقّت.\n3. نام 7-8 ساعات.\n4. فطار خفيف ووصل بدري.\n5. ابدأ بالأسئلة اللي عارفها لبناء الثقة.'},
   {k:['بومودورو','مؤقت','استراحة','تقسيم الوقت'], a:
-    'تقنية بومودورو:\n• 25 دقيقة تركيز كامل.\n• 5 دقايق راحة.\n• بعد 4 جلسات، خد راحة 20-30 دقيقة.'},
+    'تقنية بومودورو:\n• 25 دقيقة تركيز كامل (الموبايل بعيد).\n• 5 دقايق راحة.\n• بعد 4 جلسات، خد راحة 20-30 دقيقة.\nالجلسات القصيرة بتخلي الدماغ مركّزة وبتمنع الملل.'},
   {k:['حفظ','احفظ','تسميع'], a:
-    'أقوى 3 طرق للحفظ:\n1. التسميع النشط بصوت عالي.\n2. التكرار المتباعد (يوم، 3 أيام، أسبوع).\n3. البطاقات التعليمية.\nلازم تختبر نفسك مش تقرأ بس!'},
+    'أقوى 3 طرق للحفظ:\n1. التسميع النشط بصوت عالي من غير ما تبص في الكتاب.\n2. التكرار المتباعد: النهاردة، وبعدين بعد يوم، وبعد 3 أيام، وبعد أسبوع.\n3. البطاقات التعليمية: سؤال في وجه وجواب في خلف.\nالقراءة السلبية وحدها مش كفاية — لازم تختبر نفسك!'},
   {k:['مذاكرة','ادرس','أدرس','أذاكر','نصيحة','نصايح','تركيز','تشتت'], a:
-    'خطة مذاكرة ناجحة:\n1. حدد هدف يومي صغير وواضح.\n2. ذاكر بالفهم ثم لخّص بكلامك.\n3. اختبر نفسك بالأسئلة (Active Recall).\n4. ذاكر الصعب في وقت نشاطك الأعلى.\n5. كافئ نفسك بعد كل جلسة.'},
-  {k:['رياضيات','معادلة','جبر','هندسة','مثلثات','تفاضل','تكامل','تربيعية'], a:
-    'أهم قاعدة في الرياضيات — المعادلة التربيعية:\nax² + bx + c = 0\nالحل: x = (-b ± √(b²-4ac)) ÷ 2a\n• المميز موجب → حلان.\n• صفر → حل واحد.\n• سالب → لا يوجد حل حقيقي.\nولو عايز تحسب عملية، اكتبها هنا (مثال: 25*4+7).'},
-  {k:['فيزياء','سرعة','تسارع','حركة','كهرباء'], a:
-    'أساسيات الفيزياء:\n• السرعة = المسافة ÷ الزمن (م/ث).\n• التسارع = تغير السرعة ÷ الزمن (م/ث²).\n• القوة = الكتلة × التسارع.\nارسم خط زمن وحدد المعطيات قبل التعويض.'},
-  {k:['كيمياء','عنصر','تفاعل','مول'], a:
-    'نصايح الكيمياء:\n• احفظ أول 20 عنصر في الجدول الدوري.\n• عدد المولات = الكتلة ÷ الكتلة المولية.\n• اكتب المعادلات موزونة قبل الحساب.'},
+    'خطة مذاكرة ناجحة:\n1. حدد هدف يومي صغير وواضح (فصل واحد + تمارين).\n2. ذاكر بالفهم الأول ثم لخّص بكلامك أنت.\n3. اختبر نفسك بالأسئلة — أقوى طريقة علميًا.\n4. ذاكر المواد الصعبة في وقت نشاطك الأعلى.\n5. كافئ نفسك بعد كل جلسة.\nولو عايز خطة لمادة معينة اكتبلي اسمها.'},
+  {k:['رياضيات','جبر','هندسة','مثلثات','تفاضل','تكامل','حساب'], a:
+    'نصايح الرياضيات من غير حلول جاهزة:\n• افهم فكرة كل درس من حصص مستر أحمد قبل ما تحل.\n• حل كل مسالة بنفسك خطوة خطوة — ولو غلطت رجع للشرح.\n• اعمل دفتر أخطاء: اكتب كل غلط وسبب عشان ما تكررش.\n• الحل السريع بيجي بالتدريب مش بالحفظ.\nالقوانين هتلاقيها مشروحة بالتفصيل في الحصص.'},
+  {k:['فيزياء','حركة','كهرباء'], a:
+    'نصايح الفيزياء:\n• افهم المفهوم قبل أي قانون — والقوانين مشروحة في حصص مستر أحمد.\n• في المسائل: حدد المعطيات والمطلوب الأول، وارسم رسمة توضيحية.\n• حُل أمثلة المحاضرة بنفسك من غير ما تبص في الحل.\n• وحدة كل كمية مهمة جدًا في الحل.'},
+  {k:['كيمياء','عنصر','تفاعل'], a:
+    'نصايح الكيمياء:\n• راجع الجدول الدوري تدريجيًا مع التسميع.\n• اكتب المعادلات بنفسك مرات كتير لحد ما تظبط.\n• لخّص كل باب في ورقة واحدة تراجع منها ليلة الامتحان.\n• حل مسائل الكتاب المقرر بنفسك بعد كل حصة.'},
   {k:['عربي','نحو','إعراب','بلاغة'], a:
-    'نصايح العربي:\n• النحو: افهم موقع الكلمة في الجملة والقاعدة هتتبعها.\n• احفظ القواعد بأمثلة مش حفظ جاف.\n• اقرأ النص مرتين قبل الإعراب.'},
+    'نصايح العربي:\n• النحو: افهم موقع الكلمة في الجملة (فاعل؟ مفعول به؟) والقاعدة هتتبعها لوحدها.\n• احفظ القواعد بأمثلة مش حفظ جاف.\n• البلاغة: اربط كل صورة بمثال من نصوصك المقررة.\n• اقرأ النص مرتين قبل الإعراب.'},
   {k:['انجليزي','إنجليزي','english','جرامر'], a:
-    'نصايح الإنجليزي:\n• ركز على الأزمنة (Tenses) — 60% من الامتحان.\n• احفظ 10 كلمات يوميًا بجُمل كاملة.\n• في الـ Reading: اقرأ الأسئلة الأول.'},
+    'نصايح الإنجليزي:\n• ركز على الأزمنة (Tenses) — معظم الامتحان.\n• احفظ 10 كلمات يوميًا داخل جُمل كاملة مش كلمات مفردة.\n• في الـ Reading: اقرأ الأسئلة الأول ثم دوّر على الإجابة في النص.'},
   {k:['مش بيفتح','مش شغال','بطيء','مشكلة تقنية','عطل'], a:
     'حلول المشاكل التقنية:\n• الفيديو مش بيفتح: حدّث الصفحة وتأكد من الإنترنت.\n• الحصة محمية: فعّل الكود بعد قبول الدفعة.\n• لو المشكلة مستمرة كلمنا: 01147414419'},
   {k:['تواصل','رقم','اتصل','واتساب','شكوى','دعم','مساعدة','الادارة','الإدارة'], a:
-    'تواصل معنا:\n• تليفون / واتساب: +20 11 47414419\n• متاحين لأي استفسار — وأنا موجود هنا 24 ساعة.'},
+    'تواصل معنا:\n• تليفون / واتساب: +20 11 47414419\n• متاحين لأي استفسار عن الدفع أو الحصص أو الامتحانات.'},
   {k:['مين انت','من انت','عن المنصة','مستر احمد','منصة','البنا'], a:
-    'أنا «فتحي بوت» — المساعد الذكي لمنصة مستر أحمد فتحي البنا التعليمية.\nالمنصة بتوفر: حصص مسجّلة، امتحانات بنظام مراقبة ضد الغش، ومتابعة من الإدارة.\nهدفي أساعدك تذاكر بذكاء وتوصل لأعلى الدرجات.'},
+    'أنا «فتحي بوت» — المساعد الذكي لمنصة مستر أحمد فتحي البنا التعليمية.\nوظيفتي أساعدك تنظّم مذاكرتك وتذاكر بذكاء — الحلول والقوانين مصدرها حصص مستر أحمد.\nمبتغشّش، وامتحن بنفسك عشان درجتك تكون بجد.'},
   {k:['زهقت','تعبت','محبط','مليت','خايف','قلق'], a:
-    'اسمع مني: الإحساس ده طبيعي وبيحصل لأفضل الطلاب.\n• خد استراحة 15 دقيقة حقيقية.\n• رجع ذاكر 25 دقيقة بس على أصغر جزء.\n• التقدم الصغير المستمر بيتغلب على الحفظ الليلي.\nأنت أقوى من اللي فات!'},
+    'اسمع مني: الإحساس ده طبيعي وبيحصل لأفضل الطلاب.\n• خد استراحة 15 دقيقة حقيقية (مشي أو ميه — مش موبيل).\n• رجع ذاكر 25 دقيقة بس على أصغر جزء.\n• التقدم الصغير المستمر بيتغلب على الحفظ الليلي.\nأنت أقوى من اللي فات!'},
   {k:['شكرا','متشكر','تسلم','ربنا يخليك'], a:'العفو! دي واجبي.\nلو احتجت أي حاجة أنا موجود — بالتوفيق في دراستك!'}
 ];
-var AI_FALLBACK = 'مش متأكد إنني فهمت سؤالك.\nجرّب تسألني عن:\n• طريقة الدفع أو تفعيل الكود\n• نظام الامتحانات والمراقبة\n• نصايح مذاكرة\n• أو اكتب عملية حسابية وأحلها لك';
+var AI_FALLBACK = 'مش متأكد إنني فهمت سؤالك.\nأساعدك في:\n• تنظيم المذاكرة وأساليب الحفظ\n• طريقة الدفع وتفعيل الكود\n• معلومات الامتحانات والمراقبة\nالقوانين والحلول هتلاقيها مشروحة في حصص مستر أحمد.';
 function aiWelcome(){
   var u = me();
-  return 'أهلاً'+(u ? ' يا '+u.name.split(' ')[0] : '')+' أنا «فتحي بوت» — مساعدك الذكي في منصة مستر أحمد فتحي البنا.\nاسألني عن:\n• طريقة الدفع أو تفعيل الكود\n• نظام الامتحانات والمراقبة\n• نصايح مذاكرة في أي مادة\n• أو اكتب أي عملية حسابية وأحلها لك فورًا';
+  return 'أهلاً'+(u ? ' يا '+u.name.split(' ')[0] : '')+' أنا «فتحي بوت» — مساعدك الذكي في منصة مستر أحمد فتحي البنا.\nأساعدك في:\n• تنظيم المذاكرة وأساليب الحفظ والتركيز\n• طريقة الدفع وتفعيل كود الحصص\n• معلومات الامتحانات ونظام المراقبة\nملحوظة: أنا مش بحل واجبات ولا بأدي حلول جاهزة — دراستك بيدك، والحصص هي مرجعك.';
 }
 
 var aiBooted = false;
@@ -2481,16 +2501,6 @@ function aiUserSend(forced){
 }
 function aiReply(qraw){
   var q = qraw.toLowerCase().trim();
-  if(/^[\d\s+\-*/().,%^×÷]+$/.test(q) && /\d/.test(q) && /[+\-*/^×÷%]/.test(q)){
-    var expr = q.replace(/×/g,'*').replace(/÷/g,'/').replace(/\^/g,'**').replace(/,/g,'');
-    try{
-      var val = Function('"use strict";return ('+expr+')')();
-      if(typeof val === 'number' && isFinite(val)){
-        return 'الناتج = ' + (Math.round(val * 1e6) / 1e6) + '\nتحب أحلّ لك كمان؟';
-      }
-    }catch(_){}
-    return 'اكتب العملية بصيغة زي: (12+5)*3';
-  }
   var best = null, bs = 0;
   for(var i = 0; i < AI_INTENTS.length; i++){
     var it = AI_INTENTS[i], s = 0;
@@ -2501,6 +2511,10 @@ function aiReply(qraw){
   }
   if(best && bs > 0){
     return typeof best.a === 'function' ? best.a() : best.a;
+  }
+  /* أي سؤال محسوس/حسابي أو حل واجب — يتحول للدراسة الصح */
+  if(/[\d]/.test(q) && /[+\-*/×÷^=]/.test(q)){
+    return 'أنا مش آلة حاسبة وبمش ليك حلول جاهزة 😊\nالأفضل ليك: حُل العملية بنفسك على ورقة، ولو وقفت في خطوة رجعلها من حصة مستر أحمد — ده اللي هيفيدك في الامتحان فعلًا.';
   }
   return AI_FALLBACK;
 }
