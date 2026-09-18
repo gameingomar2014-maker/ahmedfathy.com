@@ -689,7 +689,7 @@ var PLACEHOLDER='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http:
 
 function hashPass(s){try{if(window.crypto&&crypto.subtle&&window.TextEncoder){var d=new TextEncoder().encode('afth1:'+s);return crypto.subtle.digest('SHA-256',d).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return('0'+x.toString(16)).slice(-2)}).join('')})}}catch(_){}var h=5381;for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))|0}return Promise.resolve('fb:'+(h>>>0).toString(16)+':'+s.length)}
 
-var DATA_VERSION='v17-banna-admin-guard';
+var DATA_VERSION='v18-banna-safe-reset';
 function autoWipe(){try{if(localStorage.getItem('afth_dataver')!==DATA_VERSION){Object.keys(localStorage).forEach(function(k){if(k.indexOf('afth_')===0)localStorage.removeItem(k)});try{indexedDB.deleteDatabase('afth_media')}catch(_){}localStorage.setItem('afth_dataver',DATA_VERSION)}}catch(_){}}
 
 var IDB=(function(){var dbp=null;function open(){if(!dbp){dbp=new Promise(function(res,rej){try{var rq=indexedDB.open('afth_media',1);var st=false;function done(f,a){if(!st){st=true;f(a)}}rq.onupgradeneeded=function(){try{rq.result.createObjectStore('media')}catch(_){}};rq.onsuccess=function(){done(res,rq.result)};rq.onerror=function(){done(rej,rq.error)};rq.onblocked=function(){done(rej,new Error('blocked'))};setTimeout(function(){done(rej,new Error('timeout'))},4000)}catch(e){done(rej,e)}})}return dbp}
@@ -749,10 +749,9 @@ function closeAllModals(){$$('.mback').forEach(function(b){b.remove()});document
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
 function confirmDlg(title,msg,okText,danger){okText=okText||'تأكيد';return new Promise(function(res){var b=openModal('<div class="m-head"><h3>'+esc(title)+'</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div><p class="m-msg">'+esc(msg)+'</p><div class="m-actions"><button class="btn ghost sm" id="dlg-cx">إلغاء</button><button class="btn sm '+(danger===false?'green':'red')+'" id="dlg-ok">'+esc(okText)+'</button></div>');qs('#dlg-cx').onclick=function(){closeModal();res(false)};qs('#dlg-ok').onclick=function(){closeModal();res(true)}})}
 
-/* ===== مصادقة — زر دخول الإدارة في الفوتر + حماية من التخمين ===== */
+/* ===== مصادقة — نافذة الإدارة فاضية ومن غير زر التصفير الخطير ===== */
 var admFailCount=0,admLockUntil=0;
 function openLogin(mode){closeAllModals();var isAdmin=mode==='admin';
-/* حماية: لو حد جرب 5 مرات غلط في نافذة الإدارة → حظر 5 دقايق */
 if(isAdmin&&admLockUntil>Date.now()){
 var secs=Math.ceil((admLockUntil-Date.now())/1000);
 toast('محاولات كتير غلط — برجاء الانتظار '+secs+' ثانية قبل المحاولة تاني','err');
@@ -762,7 +761,7 @@ var b=openModal('<div class="m-head"><h3>'+(isAdmin?'دخول الإدارة':'�
 '<label>البريد الإلكتروني<input name="email" type="text" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="اكتب بريدك" dir="ltr" style="text-align:left"></label>'+
 '<label>كلمة المرور<input name="pass" type="password" required autocomplete="new-password" dir="ltr" style="text-align:left"></label>'+
 '<button class="btn green w100" type="submit"><i data-lucide="log-in"></i> دخول</button>'+
-(isAdmin?'<p class="m-alt"><a class="danger-link" onclick="factoryReset()">تصفير بيانات المنصة بالكامل</a></p>':'<p class="m-alt">لسه معندكش حساب؟ <a id="go-reg">أنشئ حسابًا جديدًا</a> · <a id="forgot-link">نسيت كلمة المرور؟</a></p>')+
+(isAdmin?'<p class="m-alt" style="color:var(--ink2)">هذه المنطقة للإدارة فقط</p>':'<p class="m-alt">لسه معندكش حساب؟ <a id="go-reg">أنشئ حسابًا جديدًا</a> · <a id="forgot-link">نسيت كلمة المرور؟</a></p>')+
 '</form>');
 var gr=b.querySelector('#go-reg');if(gr)gr.onclick=openRegister;
 var fg=b.querySelector('#forgot-link');if(fg)fg.onclick=openResetReq;
@@ -770,14 +769,13 @@ b.querySelector('#lf').onsubmit=function(e){e.preventDefault();var fd=new FormDa
 hashPass(pass).then(function(h){var u=null;for(var i=0;i<users.length;i++){
 if(users[i].email&&users[i].email.toLowerCase()===email&&users[i].passHash===h){u=users[i];break}}
 if(!u){
-/* محاولة فاشلة: لو كانت على نافذة الإدارة نعدّها وننبّه الإدارة */
 if(isAdmin){admFailCount++;if(admFailCount>=5){admLockUntil=Date.now()+5*60*1000;admFailCount=0;toast('محاولات كتير غلط — تم حظر دخول الإدارة من هذا الجهاز لمدة 5 دقايق','err')}else{toast('البيانات غير صحيحة (محاولة '+admFailCount+' من 5)','err')}
 notifyAdmin('⚠️ حد حاول الدخول للوحة الإدارة ببيانات غلط من جهاز جديد','warn');return}
 toast('البريد الإلكتروني أو كلمة المرور غير صحيحة','err');return}
 if(u.role==='admin')admFailCount=0;
 session=u.id;persist(['session']);if(!CLOUD)persist();closeAllModals();renderNav();toast('أهلاً بيك، '+u.name.split(' ')[0]);go(u.role==='admin'?'admin':u.role==='teacher'?'teach':'videos')})}}
 
-/* ===== نسيت كلمة المرور — طلب يوصل للإدارة بمعلومات كاملة ===== */
+/* ===== نسيت كلمة المرور ===== */
 function openResetReq(){closeAllModals();
 var b=openModal('<div class="m-head"><h3>استرداد كلمة المرور</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div><p class="m-msg">اكتب بريدك وكلمة المرور الجديدة اللي عايزها — طلبك هيوصل للإدارة، وأول ما توافق هتدخل بالباس الجديد ويوصلك إشعار.</p><form id="rrf" class="form"><label>بريدك المسجّل<input name="email" type="email" required dir="ltr" style="text-align:left"></label><label>كلمة المرور الجديدة<input name="np" type="password" required minlength="6" dir="ltr" style="text-align:left"></label><button class="btn green w100" type="submit"><i data-lucide="key-round"></i> إرسال الطلب للإدارة</button></form>');
 b.querySelector('#rrf').onsubmit=function(e){e.preventDefault();var fd=new FormData(e.target);var email=String(fd.get('email')||'').trim().toLowerCase();var np=String(fd.get('np')||'').trim();var found=users.some(function(u){return u.email&&u.email.toLowerCase()===email});if(!found){toast('مفيش حساب بالبريد ده — تأكد منه','err');return}
@@ -831,7 +829,7 @@ else create(h,null)})}}
 function logout(){if(ER&&!ER.ended)finishExam(false,'تم التسليم تلقائيًا');session=null;persist(['session']);qs('#notif-panel').classList.remove('open');renderNav();go('home');toast('تم تسجيل الخروج','warn')}
 
 function deleteMyAccount(){var u=me();if(!u){toast('سجّل الدخول الأول','warn');return}
-if(u.role==='admin'){toast('حساب الإدارة مش بيتحذف من هنا — استخدم تصفير المنصة','warn');return}
+if(u.role==='admin'){toast('حساب الإدارة مش بيتحذف من هنا — استخدم تصفير المنصة من لوحة الإدارة','warn');return}
 confirmDlg('حذف الحساب نهائيًا','سيتم حذف حسابك ('+u.name+') وكل دفعاتك ونتائجك نهائيًا — لا يمكن الرجوع. متأكد؟','نعم، احذف حسابي').then(function(ok){
 if(!ok)return;
 payments.filter(function(p){return p.uid===u.id}).forEach(function(p){if(p.mediaPath||p.mediaKey)mediaDelPath(p.mediaPath||p.mediaKey)});
@@ -1280,7 +1278,7 @@ function toCSV(rows){return'\uFEFF'+rows.map(function(r){return r.map(function(c
 function exportPaymentsCSV(){var rows=[['الطالب','البريد','الحصة/المادة','المبلغ','الحالة','التاريخ']];payments.forEach(function(p){var u=users.find(function(x){return x.id===p.uid});rows.push([p.uname,u?u.email:'',p.subject,p.amount+' ج',p.status,fmtFull(p.date)])});downloadFile('الدفعات.csv',toCSV(rows));toast('تم التنزيل')}
 function exportStudentsCSV(){var paidSet=new Set(payments.filter(function(p){return p.status==='approved'}).map(function(p){return p.uid}));var rows=[['الاسم','الصف','البريد','الكوينز','حصص مدفوعة','حالة الدفع','التسجيل']];users.filter(function(u){return u.role==='student'}).forEach(function(s){rows.push([s.name,s.grade||'',s.email,s.coins||0,(s.ownedLessons||[]).length,paidSet.has(s.id)?'مدفوع':'غير مدفوع',fmtDate(s.created)])});downloadFile('الطلاب.csv',toCSV(rows));toast('تم التنزيل')}
 function exportResultsCSV(){var rows=[['الطالب','الامتحان','الدرجة','الكوينز','مخالفات','النزاهة','مؤشر AI','التاريخ']];results.forEach(function(r){rows.push([r.uname,r.etitle,r.disq?'ملغي':r.score+'%',r.coins||0,r.vio,r.integ+'%',r.bot?'مرتفع':'سليم',fmtFull(r.date)])});downloadFile('النتائج.csv',toCSV(rows));toast('تم التنزيل')}
-function exportBackup(){var data={app:'afth-banna',version:7,date:Date.now(),users:users,videos:videos,exams:exams,payments:payments,results:results,comments:comments,notifications:notifications,resets:resets,lives:lives,posts:posts,settings:settings};downloadFile('backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(data,null,1),'application/json');toast('تم التنزيل')}
+function exportBackup(){var data={app:'afth-banna',version:8,date:Date.now(),users:users,videos:videos,exams:exams,payments:payments,results:results,comments:comments,notifications:notifications,resets:resets,lives:lives,posts:posts,settings:settings};downloadFile('backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(data,null,1),'application/json');toast('تم التنزيل')}
 function importBackup(inp){var f=inp.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result);if(!d||d.app!=='afth-banna')throw new Error('bad');
 confirmDlg('استعادة نسخة احتياطية','سيتم استبدال كل البيانات الحالية. متأكد؟','استعادة').then(function(ok){if(!ok)return;
 if(Array.isArray(d.users))users=d.users;if(Array.isArray(d.videos))videos=d.videos;if(Array.isArray(d.exams))exams=d.exams;if(Array.isArray(d.payments))payments=d.payments;if(Array.isArray(d.results))results=d.results;if(Array.isArray(d.comments))comments=d.comments;if(Array.isArray(d.notifications))notifications=d.notifications;if(Array.isArray(d.resets))resets=d.resets;if(Array.isArray(d.lives))lives=d.lives;if(Array.isArray(d.posts))posts=d.posts;if(d.settings&&typeof d.settings==='object')settings=d.settings;session=null;persist();refreshSubjects();renderNav();if(curView==='admin')renderAdmin();toast('تمت الاستعادة بنجاح')})}catch(_){toast('الملف غير صالح','err')}};rd.readAsText(f);inp.value=''}
@@ -1319,7 +1317,6 @@ function adminSetPass(uidT){var u=null;for(var i=0;i<users.length;i++){if(users[
 var b=openModal('<div class="m-head"><h3>تعيين باس جديد: '+esc(u.name)+'</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div><form id="spf" class="form"><label>كلمة المرور الجديدة<input id="sp-in" type="text" required minlength="6" dir="ltr" style="text-align:left"></label><button class="btn green w100" type="submit"><i data-lucide="key-round"></i> تعيين وإشعار</button></form>');
 b.querySelector('#spf').onsubmit=function(e){e.preventDefault();var np=qs('#sp-in').value.trim();if(np.length<6){toast('6 أحرف على الأقل','err');return}
 hashPass(np).then(function(h){u.passHash=h;persist(['users']);notify(u.id,'تم تغيير كلمة مرورك — باسك الجديد: '+np,'warn');closeModal();toast('تم التعيين وإشعاره');renderAdminTab()})}}
-/* استرداد الباس — الموافقة بتغيره فعليًا مشفّر وإشعار للطالب */
 function approveReset(id){var r=null;for(var i=0;i<resets.length;i++){if(resets[i].id===id){r=resets[i];break}}if(!r)return;
 var u=users.find(function(x){return x.email&&x.email.toLowerCase()===r.email});if(!u){toast('مفيش حساب بالبريد ده','err');return}
 hashPass(r.newpass).then(function(h){u.passHash=h;resets=resets.filter(function(x){return x.id!==id});persist(['users','resets']);notify(u.id,'تم قبول طلبك ✅ كلمة مرورك الجديدة: '+r.newpass+' — غيّرها من صفحة حسابك لما تدخل','ok');renderNav();renderAdminTab();toast('تم تغيير باس '+u.name+' وإشعاره')})}
