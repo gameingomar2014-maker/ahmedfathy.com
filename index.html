@@ -43,6 +43,14 @@ svg.lucide{width:1.05em;height:1.05em;flex:none;vertical-align:-.15em}
 .ico-btn:hover{border-color:var(--ink)}
 .ico-btn.danger:hover{border-color:var(--red);color:var(--red)}
 .ico-btn.edit:hover{border-color:var(--green);color:var(--green)}
+.live-chip{display:inline-flex;align-items:center;gap:7px;background:var(--red);color:#fff;border-radius:99px;padding:4px 14px;font-weight:700;font-size:12.5px;font-family:'Changa'}
+.live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#fff;animation:blink 1.2s infinite}
+.post-card{background:var(--card);border:1.5px solid var(--ink);border-radius:var(--r);padding:20px 22px;box-shadow:var(--hard);margin-bottom:16px}
+.post-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.post-head b{color:var(--green)}
+.post-date{font-size:12px;color:var(--ink2)}
+.post-body{font-size:15px;white-space:pre-line;overflow-wrap:break-word}
+.post-img{width:100%;max-height:340px;object-fit:cover;border-radius:10px;border:1.5px solid var(--line2);margin-top:10px;display:block}
 @media(max-width:760px){.hide-m{display:none!important}.mnav .hide-m{display:inline!important}}
 #contact-strip{background:var(--green-d);color:var(--paper);font-size:13px;position:relative;z-index:61}
 .strip-in{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;flex-wrap:wrap}
@@ -178,6 +186,7 @@ section.block{padding:64px 0}
 .xrow::before{content:'';position:absolute;right:-4px;top:18px;bottom:18px;width:4px;background:var(--gold);border-radius:4px}
 .xrow:first-child{border-top:none}
 .xico{flex:none;width:52px;height:52px;border-radius:13px;background:var(--card);border:1.5px solid var(--ink);display:grid;place-items:center;color:var(--green)}
+.xico svg{width:23px;height:23px}
 .xinfo{flex:1;min-width:0}
 .xinfo h3{font-size:18px;margin-bottom:4px}
 .xmeta{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink2);align-items:center}
@@ -472,7 +481,7 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
 <div>
 <span class="kicker"><i data-lucide="graduation-cap"></i> منصّة مستر أحمد فتحي البنا التعليمية</span>
 <h1>افهم الدرس من جذّره،<br>وخد <span class="hl">التفوّق<svg viewBox="0 0 200 20" preserveAspectRatio="none"><path d="M4 14 C 55 3, 140 19, 196 7"/></svg></span> معاك</h1>
-<p class="lead">حصص مسجّلة بشرح مبسّط، امتحانات إلكترونية بنظام مراقبة يمنع الغش، وشراء الحصص المدفوعة بأمان — كله في مكان واحد.</p>
+<p class="lead">حصص لكل صف دراسي، امتحانات بنظام مراقبة، بث مباشر للمدرسين، ومنشورات وإعلانات — كل ده في مكان واحد.</p>
 <div class="hero-tel"><i data-lucide="phone-call"></i> استفسارات ودعم: <a href="tel:+201147414419" dir="ltr">+20 11 47414419</a></div>
 <div class="hero-cta">
 <button class="btn green" onclick="openRegister()"><i data-lucide="sparkles"></i> ابدأ دلوقتي — حساب جديد</button>
@@ -493,12 +502,16 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
 <div class="stats" id="home-stats"></div>
 </div>
 <div class="ticker"><div class="ticker-in" id="ticker-in"></div></div>
+<section class="block wrap" id="home-live-sec" style="display:none">
+<div class="sec-h"><span class="live-chip"><span class="live-dot"></span> بث مباشر الآن</span><h2 style="font-size:clamp(20px,3vw,28px)">اشترك في البث!</h2><span class="rule"></span></div>
+<div id="home-live-box"></div>
+</section>
 <section class="block wrap">
 <div class="sec-h"><span class="num">٠١ /</span><h2>إزاي تبدأ؟</h2><span class="rule"></span></div>
 <div class="steps">
-<div class="step"><span class="snum">٠١</span><div><h3>أنشئ حسابك</h3><p>سجّل كطالب في أقل من دقيقة — وتقدر تحذف حسابك نهائيًا من صفحة «حسابي» في أي وقت.</p></div></div>
+<div class="step"><span class="snum">٠١</span><div><h3>أنشئ حسابك واختار صفك</h3><p>سجّل كطالب واختار صفك الدراسي — الحصص والامتحانات والبث والمنشورات بتظهر لصفك بالظبط.</p></div></div>
 <div class="step"><span class="snum">٠٢</span><div><h3>ادفع ثمن الحصة</h3><p>لما تدوس على حصة مدفوعة بيظهر لك طلب شراء بالسعر — حوّل وارفع صورة الإيصال، والإدارة توافق.</p></div></div>
-<div class="step"><span class="snum">٠٣</span><div><h3>الحصة تفتح لحسابك</h3><p>بعد قبول دفعتك بيوصلك إشعار والحصة بتفتح تلقائيًا لحسابك للأبد.</p></div></div>
+<div class="step"><span class="snum">٠٣</span><div><h3>تابع البث والمنشورات</h3><p>لما المدرس يبث مباشر هتشوف شارة حمراء، والمنشورات والإعلانات في صفحة الأخبار مع إشعار.</p></div></div>
 <div class="step"><span class="snum">٠٤</span><div><h3 id="step4-h">امتحن واختبر نفسك</h3><p id="step4-p">امتحانات بمؤقّت تحت مراقبة ذكية تمنع الغش، ومراجعة كاملة بعد التسليم. وعندك مساعد ذكي جنبك.</p></div></div>
 </div>
 </section>
@@ -524,7 +537,7 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
 <section class="wrap" style="padding-bottom:20px">
 <div class="cta-band">
 <h3>جاهز تبدأ أول حصة؟</h3>
-<p>اعمل حسابك دلوقتي وادفع ثمن الحصة وخش على شرح مستر أحمد فتحي البنا من أي مكان.</p>
+<p>اعمل حسابك دلوقتي واختار صفك وادفع ثمن الحصة وخش على شرح مستر أحمد فتحي البنا من أي مكان.</p>
 <p style="font-size:14px">لأي استفسار: <a href="tel:+201147414419" dir="ltr" style="font-weight:800;color:var(--gold-l)">+20 11 47414419</a></p>
 <button class="btn" onclick="openRegister()"><i data-lucide="user-round"></i> إنشاء حساب طالب</button>
 </div>
@@ -534,7 +547,7 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
 <section id="view-videos" class="view">
 <div class="wrap" style="padding-bottom:60px">
 <div class="page-head">
-<div><h2>الحصص المسجّلة</h2><div class="sub">الحصص المدفوعة بتتفتح بعد الدفع وموافقة الإدارة</div></div>
+<div><h2>الحصص المسجّلة</h2><div class="sub">حصص صفك — المدفوعة بتتفتح بعد الدفع وموافقة الإدارة</div></div>
 <div class="searchbox"><i data-lucide="search"></i><input id="v-search" placeholder="ابحث بالعنوان أو المادة…" oninput="vState.q=this.value;debV()"></div>
 </div>
 <div class="filters" id="v-filters"></div>
@@ -545,11 +558,29 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
 <section id="view-exams" class="view">
 <div class="wrap" style="padding-bottom:60px">
 <div class="page-head">
-<div><h2>الامتحانات الإلكترونية</h2><div class="sub">كل امتحان تحت نظام مراقبة كامل ضد الغش</div></div>
+<div><h2>الامتحانات الإلكترونية</h2><div class="sub">امتحانات صفك — كل امتحان تحت نظام مراقبة ضد الغش</div></div>
 <div class="searchbox"><i data-lucide="search"></i><input id="x-search" placeholder="ابحث في الامتحانات…" oninput="xState.q=this.value;debX()"></div>
 </div>
 <div class="filters" id="x-filters"></div>
 <div id="exams-list"></div>
+</div>
+</section>
+
+<section id="view-live" class="view">
+<div class="wrap" style="padding-bottom:60px">
+<div class="page-head">
+<div><h2>البث المباشر</h2><div class="sub">حصص مباشرة من مدرسي صفك — تدوس تشوف على طول</div></div>
+</div>
+<div id="live-list"></div>
+</div>
+</section>
+
+<section id="view-news" class="view">
+<div class="wrap" style="padding-bottom:60px">
+<div class="page-head">
+<div><h2>المنشورات والإعلانات</h2><div class="sub">كل اللي المدرسين بينزلوه لصفك — إعلانات وواجبات وملخصات</div></div>
+</div>
+<div id="news-list"></div>
 </div>
 </section>
 
@@ -633,9 +664,6 @@ footer{border-top:1.5px solid var(--ink);margin-top:70px;padding:34px 0 calc(110
 
 <script>
 'use strict';
-/* ================================================================
-   إعدادات السحابة — لو فاضية تشتغل وضع محلي (localStorage)
-================================================================ */
 var FIREBASE_CONFIG={apiKey:"",authDomain:"",projectId:"",storageBucket:""};
 var CLOUD=!!(FIREBASE_CONFIG.apiKey&&FIREBASE_CONFIG.projectId);
 
@@ -647,73 +675,67 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){retur
 function fmtDate(t){return new Date(t).toLocaleDateString('ar-EG',{day:'numeric',month:'long',year:'numeric'})}
 function fmtFull(t){return new Date(t).toLocaleString('ar-EG',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
 function mkDeb(fn,ms){var t=null;return function(){if(t)clearTimeout(t);t=setTimeout(fn,ms||160)}}
-
 var iconsQ=false;
 function icons(){if(iconsQ)return;iconsQ=true;requestAnimationFrame(function(){iconsQ=false;try{if(window.lucide)lucide.createIcons()}catch(_){}})}
 function afterBoot(){icons()}
 
 var ADMIN_EMAIL='index122026@gmail.com';
 var ADMIN_PASS='indexomar&ahmed';
+var GRADES=['ابتدائي 4','ابتدائي 5','ابتدائي 6','إعدادي 1','إعدادي 2','إعدادي 3','ثانوي 1','ثانوي 2','ثانوي 3'];
+function gradeOpts(sel){return'<option value="الكل"'+(sel==='الكل'?' selected':'')+'>كل الصفوف</option>'+GRADES.map(function(g){return'<option value="'+g+'"'+(sel===g?' selected':'')+'>'+g+'</option>'}).join('')}
 var SUBJ_COLORS={'رياضيات':'#1d5140','فيزياء':'#8a4b22','كيمياء':'#155e56','لغة عربية':'#8c2f23','لغة إنجليزية':'#4a5320','أحياء':'#2f6b31','تاريخ':'#6b4a1f','جغرافيا':'#33606b'};
 function subjColor(s){return SUBJ_COLORS[s]||'#3a352a'}
 var PLACEHOLDER='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="90"><rect width="120" height="90" fill="#ddd5c0"/><text x="60" y="52" font-size="30" text-anchor="middle" fill="#a89f85">?</text></svg>');
 
-function hashPass(s){
-try{if(window.crypto&&crypto.subtle&&window.TextEncoder){var d=new TextEncoder().encode('afth1:'+s);return crypto.subtle.digest('SHA-256',d).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return('0'+x.toString(16)).slice(-2)}).join('')})}}catch(_){}
-var h=5381;for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))|0}
-return Promise.resolve('fb:'+(h>>>0).toString(16)+':'+s.length)}
+function hashPass(s){try{if(window.crypto&&crypto.subtle&&window.TextEncoder){var d=new TextEncoder().encode('afth1:'+s);return crypto.subtle.digest('SHA-256',d).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return('0'+x.toString(16)).slice(-2)}).join('')})}}catch(_){}var h=5381;for(var i=0;i<s.length;i++){h=((h<<5)+h+s.charCodeAt(i))|0}return Promise.resolve('fb:'+(h>>>0).toString(16)+':'+s.length)}
 
-var DATA_VERSION='v15-banna-full-fixed';
+var DATA_VERSION='v17-banna-admin-guard';
 function autoWipe(){try{if(localStorage.getItem('afth_dataver')!==DATA_VERSION){Object.keys(localStorage).forEach(function(k){if(k.indexOf('afth_')===0)localStorage.removeItem(k)});try{indexedDB.deleteDatabase('afth_media')}catch(_){}localStorage.setItem('afth_dataver',DATA_VERSION)}}catch(_){}}
 
-/* IndexedDB */
 var IDB=(function(){var dbp=null;function open(){if(!dbp){dbp=new Promise(function(res,rej){try{var rq=indexedDB.open('afth_media',1);var st=false;function done(f,a){if(!st){st=true;f(a)}}rq.onupgradeneeded=function(){try{rq.result.createObjectStore('media')}catch(_){}};rq.onsuccess=function(){done(res,rq.result)};rq.onerror=function(){done(rej,rq.error)};rq.onblocked=function(){done(rej,new Error('blocked'))};setTimeout(function(){done(rej,new Error('timeout'))},4000)}catch(e){done(rej,e)}})}return dbp}
 function put(k,b){return open().then(function(d){return new Promise(function(res,rej){try{var tx=d.transaction('media','readwrite');tx.objectStore('media').put(b,k);tx.oncomplete=function(){res()};tx.onerror=function(){rej(tx.error)}}catch(e){rej(e)}})})}
 function get(k){return open().then(function(d){return new Promise(function(res,rej){try{var tx=d.transaction('media','readonly');var rq=tx.objectStore('media').get(k);rq.onsuccess=function(){res(rq.result||null)};rq.onerror=function(){rej(rq.error)}}catch(e){rej(e)}})})}
 function del(k){return open().then(function(d){return new Promise(function(res){try{var tx=d.transaction('media','readwrite');tx.objectStore('media').delete(k);tx.oncomplete=function(){res()};tx.onerror=function(){res()}}catch(_){res()}})}).catch(function(){})}
 return{put:put,get:get,del:del}})();
-
 var mediaCache=new Map();
 function mediaURL(k){if(!k)return Promise.resolve(null);if(mediaCache.has(k))return Promise.resolve(mediaCache.get(k));return IDB.get(k).then(function(b){if(!b)return null;var u=URL.createObjectURL(b);mediaCache.set(k,u);return u}).catch(function(){return null})}
 function mountModalMedia(){var els=$$('.mback [data-media]');els.forEach(function(el){var k=el.getAttribute('data-media');el.removeAttribute('data-media');if(!k){el.src=PLACEHOLDER;return}mediaURL(k).then(function(u){if(el.tagName==='IMG'){el.src=u||PLACEHOLDER}else if(el.tagName==='VIDEO'&&u){el.src=u}})})}
 
-/* وسائط: سحابة أو محلي */
 var db=null,storageRef=null;
 function mediaPut(path,blob,onProg){
 if(CLOUD&&storageRef){return new Promise(function(res,rej){try{var task=storageRef.child(path).put(blob);task.on('state_changed',function(s){if(onProg)onProg(s.bytesTransferred/(s.totalSize||1))},function(e){rej(e)},function(){task.snapshot.ref.getDownloadURL().then(function(url){res({url:url,path:path})}).catch(rej)})}catch(e){rej(e)}})}
 return IDB.put(path,blob).then(function(){return{path:path}})}
 function mediaDelPath(p){if(!p)return;if(CLOUD&&storageRef){try{storageRef.child(p).delete().catch(function(){})}catch(_){}}else IDB.del(p)}
 
-/* البيانات */
-var users,videos,exams,payments,results,deviceAccounts,session,settings,notifications,comments,resets;
-var ALLCOLS=['users','videos','exams','payments','results','notifications','comments','resets','settings'];
+var users,videos,exams,payments,results,deviceAccounts,session,settings,notifications,comments,resets,lives,posts;
+var ALLCOLS=['users','videos','exams','payments','results','notifications','comments','resets','settings','lives','posts'];
 function loadLocal(){function G(k,d){try{var v=JSON.parse(localStorage.getItem('afth_'+k));return v==null?d:v}catch(_){return d}}
-users=G('users',[]);videos=G('videos',[]);exams=G('exams',[]);payments=G('payments',[]);results=G('results',[]);deviceAccounts=G('device',[]);session=G('session',null);settings=G('settings',{coins:true});notifications=G('notifications',[]);comments=G('comments',[]);resets=G('resets',[]);if(!settings||typeof settings!=='object')settings={coins:true}}
+users=G('users',[]);videos=G('videos',[]);exams=G('exams',[]);payments=G('payments',[]);results=G('results',[]);deviceAccounts=G('device',[]);session=G('session',null);settings=G('settings',{coins:true});notifications=G('notifications',[]);comments=G('comments',[]);resets=G('resets',[]);lives=G('lives',[]);posts=G('posts',[]);if(!settings||typeof settings!=='object')settings={coins:true}}
 function saveLocal(){function S(k,v){try{localStorage.setItem('afth_'+k,JSON.stringify(v))}catch(_){toast('مساحة التخزين ممتلئة','err')}}
-S('users',users);S('videos',videos);S('exams',exams);S('payments',payments);S('results',results);S('device',deviceAccounts);S('session',session);S('settings',settings);S('notifications',notifications);S('comments',comments);S('resets',resets)}
+S('users',users);S('videos',videos);S('exams',exams);S('payments',payments);S('results',results);S('device',deviceAccounts);S('session',session);S('settings',settings);S('notifications',notifications);S('comments',comments);S('resets',resets);S('lives',lives);S('posts',posts)}
 var pendingCols={},cloudTimers={};
 function persist(cols){
 if(CLOUD&&db){(cols&&cols.length?cols:ALLCOLS).forEach(function(col){if(cloudTimers[col])clearTimeout(cloudTimers[col]);cloudTimers[col]=setTimeout(function(){pendingCols[col]=true;var payload=(col==='settings')?{items:[settings]}:{items:window[col]||[]};db.collection('afth_v1').doc(col).set(payload).then(function(){setTimeout(function(){delete pendingCols[col]},900)}).catch(function(){delete pendingCols[col];toast('فشل المزامنة مع السحابة','err')})},250)})}
 else saveLocal()}
 function me(){return users?(users.find(function(u){return u.id===session})||null):null}
 function coinsOn(){return!!(settings&&settings.coins)}
+function gradeOK(item){var u=me();if(!u)return true;if(u.role==='admin'||u.role==='teacher')return true;return!item.grade||item.grade==='الكل'||item.grade===u.grade}
 
 var adminSeeded=false;
 function ensureAdmin(){var adm=users.find(function(u){return u.role==='admin'});if(adm){adminSeeded=true;return Promise.resolve()}
-return hashPass(ADMIN_PASS).then(function(h){users.push({id:'admin-root',name:'مستر أحمد فتحي البنا',role:'admin',approved:true,email:ADMIN_EMAIL,passHash:h,coins:0,paid:[],ownedLessons:[],pendingLessons:[],created:Date.now()});adminSeeded=true;persist(['users'])})}
+return hashPass(ADMIN_PASS).then(function(h){users.push({id:'admin-root',name:'مستر أحمد فتحي البنا',role:'admin',approved:true,email:ADMIN_EMAIL,passHash:h,coins:0,grade:'الكل',paid:[],ownedLessons:[],pendingLessons:[],created:Date.now()});adminSeeded=true;persist(['users'])})}
 function refreshSubjects(){var set=new Set();(videos||[]).forEach(function(v){if(v.subject)set.add(v.subject)});(exams||[]).forEach(function(e){if(e.subject)set.add(e.subject)});var el=qs('#dl-subj');if(el)el.innerHTML=Array.from(set).map(function(s){return'<option value="'+esc(s)+'">'}).join('')}
 
 function factoryReset(){confirmDlg('تصفير المنصة بالكامل','هيتم مسح كل الحسابات والدفعات والحصص والامتحانات والملفات، والرجوع لإعداد أول المرة. متأكد؟','امسح كل حاجة').then(function(ok){if(!ok)return;
 (videos||[]).forEach(function(v){[v.mediaPath,v.coverPath,v.attachPath,v.mediaKey,v.coverKey,v.attachKey].forEach(function(p){if(p)mediaDelPath(p)})});
 (payments||[]).forEach(function(p){if(p.mediaPath||p.mediaKey)mediaDelPath(p.mediaPath||p.mediaKey)});
-users=[];videos=[];exams=[];payments=[];results=[];notifications=[];comments=[];resets=[];deviceAccounts=[];session=null;settings={coins:true};
+users=[];videos=[];exams=[];payments=[];results=[];notifications=[];comments=[];resets=[];deviceAccounts=[];session=null;settings={coins:true};lives=[];posts=[];
 if(CLOUD&&db){var ps=ALLCOLS.map(function(col){var payload=(col==='settings')?{items:[settings]}:{items:[]};return db.collection('afth_v1').doc(col).set(payload).catch(function(){})});Promise.all(ps).then(function(){try{localStorage.removeItem('afth_session')}catch(_){}location.reload()})}
 else{try{Object.keys(localStorage).filter(function(k){return k.indexOf('afth_')===0}).forEach(function(k){localStorage.removeItem(k)})}catch(_){}try{indexedDB.deleteDatabase('afth_media')}catch(_){}location.reload()}})}
 
 function toast(msg,type){type=type||'ok';var ic=type==='err'?'alert-triangle':type==='warn'?'shield-alert':'check';var el=document.createElement('div');el.className='toast '+type;el.innerHTML='<i data-lucide="'+ic+'"></i><span>'+esc(msg)+'</span>';var box=qs('#toasts');if(box)box.appendChild(el);try{if(window.lucide)lucide.createIcons()}catch(_){}setTimeout(function(){el.classList.add('out');setTimeout(function(){el.remove()},300)},3400)}
-
 function notify(tUid,text,type){notifications.unshift({id:uid(),uid:tUid,text:text,type:type||'info',date:Date.now(),read:false});if(notifications.length>300)notifications.length=300;persist(['notifications']);renderNavBell()}
-function notifyStudents(text,type){users.filter(function(u){return u.role==='student'}).forEach(function(s){notifications.unshift({id:uid(),uid:s.id,text:text,type:type||'info',date:Date.now(),read:false})});persist(['notifications']);renderNavBell()}
+function notifyGrade(g,text,type){users.filter(function(u){return u.role==='student'&&(!g||g==='الكل'||u.grade===g)}).forEach(function(s){notifications.unshift({id:uid(),uid:s.id,text:text,type:type||'info',date:Date.now(),read:false})});persist(['notifications']);renderNavBell()}
 function notifyAdmin(text,type){var adm=users.find(function(u){return u.role==='admin'});if(adm)notify(adm.id,text,type)}
 function myNotifs(){var u=me();if(!u)return[];return notifications.filter(function(n){return n.uid===u.id})}
 function renderNavBell(){var bell=qs('.act-bell');if(!bell)return;var un=myNotifs().filter(function(n){return!n.read}).length;bell.innerHTML='<i data-lucide="bell"></i>'+(un?'<span class="dotb">'+un+'</span>':'');icons()}
@@ -727,8 +749,14 @@ function closeAllModals(){$$('.mback').forEach(function(b){b.remove()});document
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
 function confirmDlg(title,msg,okText,danger){okText=okText||'تأكيد';return new Promise(function(res){var b=openModal('<div class="m-head"><h3>'+esc(title)+'</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div><p class="m-msg">'+esc(msg)+'</p><div class="m-actions"><button class="btn ghost sm" id="dlg-cx">إلغاء</button><button class="btn sm '+(danger===false?'green':'red')+'" id="dlg-ok">'+esc(okText)+'</button></div>');qs('#dlg-cx').onclick=function(){closeModal();res(false)};qs('#dlg-ok').onclick=function(){closeModal();res(true)}})}
 
-/* مصادقة — نافذة الإدارة فاضية دايمًا، بدون حفظ تلقائي في المتصفح */
+/* ===== مصادقة — زر دخول الإدارة في الفوتر + حماية من التخمين ===== */
+var admFailCount=0,admLockUntil=0;
 function openLogin(mode){closeAllModals();var isAdmin=mode==='admin';
+/* حماية: لو حد جرب 5 مرات غلط في نافذة الإدارة → حظر 5 دقايق */
+if(isAdmin&&admLockUntil>Date.now()){
+var secs=Math.ceil((admLockUntil-Date.now())/1000);
+toast('محاولات كتير غلط — برجاء الانتظار '+secs+' ثانية قبل المحاولة تاني','err');
+return}
 var b=openModal('<div class="m-head"><h3>'+(isAdmin?'دخول الإدارة':'تسجيل الدخول')+'</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div>'+
 '<form id="lf" class="form" autocomplete="off">'+
 '<label>البريد الإلكتروني<input name="email" type="text" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="اكتب بريدك" dir="ltr" style="text-align:left"></label>'+
@@ -739,13 +767,25 @@ var b=openModal('<div class="m-head"><h3>'+(isAdmin?'دخول الإدارة':'�
 var gr=b.querySelector('#go-reg');if(gr)gr.onclick=openRegister;
 var fg=b.querySelector('#forgot-link');if(fg)fg.onclick=openResetReq;
 b.querySelector('#lf').onsubmit=function(e){e.preventDefault();var fd=new FormData(e.target);var email=String(fd.get('email')||'').trim().toLowerCase();var pass=String(fd.get('pass')||'').trim();
-hashPass(pass).then(function(h){var u=null;for(var i=0;i<users.length;i++){if(users[i].email&&users[i].email.toLowerCase()===email&&users[i].passHash===h){u=users[i];break}}
-if(!u){toast('البريد الإلكتروني أو كلمة المرور غير صحيحة','err');return}
+hashPass(pass).then(function(h){var u=null;for(var i=0;i<users.length;i++){
+if(users[i].email&&users[i].email.toLowerCase()===email&&users[i].passHash===h){u=users[i];break}}
+if(!u){
+/* محاولة فاشلة: لو كانت على نافذة الإدارة نعدّها وننبّه الإدارة */
+if(isAdmin){admFailCount++;if(admFailCount>=5){admLockUntil=Date.now()+5*60*1000;admFailCount=0;toast('محاولات كتير غلط — تم حظر دخول الإدارة من هذا الجهاز لمدة 5 دقايق','err')}else{toast('البيانات غير صحيحة (محاولة '+admFailCount+' من 5)','err')}
+notifyAdmin('⚠️ حد حاول الدخول للوحة الإدارة ببيانات غلط من جهاز جديد','warn');return}
+toast('البريد الإلكتروني أو كلمة المرور غير صحيحة','err');return}
+if(u.role==='admin')admFailCount=0;
 session=u.id;persist(['session']);if(!CLOUD)persist();closeAllModals();renderNav();toast('أهلاً بيك، '+u.name.split(' ')[0]);go(u.role==='admin'?'admin':u.role==='teacher'?'teach':'videos')})}}
 
-function openResetReq(){closeAllModals();var b=openModal('<div class="m-head"><h3>استرداد كلمة المرور</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div><p class="m-msg">اكتب بريدك وكلمة المرور الجديدة — الطلب هيوصل للإدارة، وأول ما توافق هتدخل بالباس الجديد ويوصلك إشعار.</p><form id="rrf" class="form"><label>بريدك المسجّل<input name="email" type="email" required dir="ltr" style="text-align:left"></label><label>كلمة المرور الجديدة<input name="np" type="password" required minlength="6" dir="ltr" style="text-align:left"></label><button class="btn green w100" type="submit"><i data-lucide="key-round"></i> إرسال الطلب للإدارة</button></form>');
-b.querySelector('#rrf').onsubmit=function(e){e.preventDefault();var fd=new FormData(e.target);var email=String(fd.get('email')||'').trim().toLowerCase();var np=String(fd.get('np')||'').trim();var found=users.some(function(u){return u.email&&u.email.toLowerCase()===email});if(!found){toast('مفيش حساب بالبريد ده','err');return}
-resets.unshift({id:uid(),email:email,newpass:np,status:'pending',date:Date.now()});persist(['resets']);notifyAdmin('طلب تغيير كلمة مرور جديد من: '+email,'warn');closeAllModals();toast('تم إرسال طلبك — الإدارة هتراجعه قريب')}}
+/* ===== نسيت كلمة المرور — طلب يوصل للإدارة بمعلومات كاملة ===== */
+function openResetReq(){closeAllModals();
+var b=openModal('<div class="m-head"><h3>استرداد كلمة المرور</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div><p class="m-msg">اكتب بريدك وكلمة المرور الجديدة اللي عايزها — طلبك هيوصل للإدارة، وأول ما توافق هتدخل بالباس الجديد ويوصلك إشعار.</p><form id="rrf" class="form"><label>بريدك المسجّل<input name="email" type="email" required dir="ltr" style="text-align:left"></label><label>كلمة المرور الجديدة<input name="np" type="password" required minlength="6" dir="ltr" style="text-align:left"></label><button class="btn green w100" type="submit"><i data-lucide="key-round"></i> إرسال الطلب للإدارة</button></form>');
+b.querySelector('#rrf').onsubmit=function(e){e.preventDefault();var fd=new FormData(e.target);var email=String(fd.get('email')||'').trim().toLowerCase();var np=String(fd.get('np')||'').trim();var found=users.some(function(u){return u.email&&u.email.toLowerCase()===email});if(!found){toast('مفيش حساب بالبريد ده — تأكد منه','err');return}
+var requester=users.find(function(u){return u.email&&u.email.toLowerCase()===email});
+resets.unshift({id:uid(),uid:requester?requester.id:null,uname:requester?requester.name:'',email:email,newpass:np,status:'pending',date:Date.now()});
+persist(['resets']);
+notifyAdmin('طلب تغيير كلمة مرور جديد من: '+(requester?requester.name:email),'warn');
+closeAllModals();toast('تم إرسال طلبك — الإدارة هتراجعه قريب')}}
 
 var tchIdBlob=null,tchIdURL=null;
 function tchPreview(inp){var box=qs('#tch-prev');tchIdBlob=null;if(!inp.files||!inp.files[0]){box.innerHTML='';return}
@@ -757,8 +797,9 @@ var b=openModal('<div class="m-head"><h3>إنشاء حساب جديد</h3><butto
 '<label>الاسم الكامل<input name="name" required minlength="2" placeholder="اسمك كما هو"></label>'+
 '<label>البريد الإلكتروني<input name="email" type="email" required autocomplete="email" dir="ltr" style="text-align:left"></label>'+
 '<label>كلمة المرور<input name="pass" type="password" required minlength="6" placeholder="6 أحرف على الأقل" autocomplete="new-password" dir="ltr" style="text-align:left"></label>'+
+'<label>الصف الدراسي *<select name="grade" required><option value="">اختار صفك…</option>'+GRADES.map(function(g){return'<option value="'+g+'">'+g+'</option>'}).join('')+'</select></label>'+
 '<div class="radio-row">'+
-'<label class="radio-card '+(slots<=0?'dis':'')+'"><input type="radio" name="role" value="student" '+(slots<=0?'disabled':'')+' checked onchange="tchField(0)"><b><i data-lucide="user-round"></i> طالب</b><small>حصص + امتحانات</small></label>'+
+'<label class="radio-card '+(slots<=0?'dis':'')+'"><input type="radio" name="role" value="student" '+(slots<=0?'disabled':'')+' checked onchange="tchField(0)"><b><i data-lucide="user-round"></i> طالب</b><small>حصص + امتحانات + بث</small></label>'+
 '<label class="radio-card"><input type="radio" name="role" value="teacher" onchange="tchField(1)"><b><i data-lucide="graduation-cap"></i> مدرّس</b><small>يتطلب رفع صورة البطاقة</small></label>'+
 '</div>'+
 '<div id="tch-field" style="display:none">'+
@@ -771,14 +812,15 @@ var b=openModal('<div class="m-head"><h3>إنشاء حساب جديد</h3><butto
 '<p class="m-alt">عندك حساب بالفعل؟ <a id="go-lin">سجّل الدخول</a></p>'+
 '</form>');
 b.querySelector('#go-lin').onclick=function(){openLogin()};
-b.querySelector('#rf').onsubmit=function(e){e.preventDefault();var fd=new FormData(e.target);var name=String(fd.get('name')||'').trim();var email=String(fd.get('email')||'').trim().toLowerCase();var pass=String(fd.get('pass')||'').trim();var role=fd.get('role')||'student';var idInp=qs('#tch-id');
+b.querySelector('#rf').onsubmit=function(e){e.preventDefault();var fd=new FormData(e.target);var name=String(fd.get('name')||'').trim();var email=String(fd.get('email')||'').trim().toLowerCase();var pass=String(fd.get('pass')||'').trim();var role=fd.get('role')||'student';var grade=String(fd.get('grade')||'').trim();var idInp=qs('#tch-id');
+if(!grade){toast('اختار صفك الدراسي','err');return}
 if(users.some(function(u){return u.email&&u.email.toLowerCase()===email})){toast('هذا البريد مسجّل بالفعل','err');return}
 if(pass.length<6){toast('كلمة المرور 6 أحرف على الأقل','err');return}
 if(role==='student'&&deviceAccounts.length>=2){toast('وصلت للحد الأقصى (حسابان على هذا الجهاز)','err');return}
 if(role==='teacher'&&(!idInp||!idInp.files||!idInp.files[0])){toast('ارفع صورة البطاقة — إجبارية للمدرّسين','err');return}
-function create(h,idInfo){var u={id:uid(),name:name,email:email,passHash:h,role:role,approved:role!=='teacher',coins:0,paid:[],ownedLessons:[],pendingLessons:[],created:Date.now()};if(idInfo){u.idURL=idInfo.url||null;u.idPath=idInfo.path||null;u.idKey=idInfo.path||null}
+function create(h,idInfo){var u={id:uid(),name:name,email:email,passHash:h,role:role,grade:grade,approved:role!=='teacher',coins:0,paid:[],ownedLessons:[],pendingLessons:[],created:Date.now()};if(idInfo){u.idURL=idInfo.url||null;u.idPath=idInfo.path||null;u.idKey=idInfo.path||null}
 users.push(u);if(role==='student')deviceAccounts.push(email);persist(['users','device']);if(role==='teacher')notifyAdmin('طلب انضمام مدرّس جديد: '+name+' — راجع صورة البطاقة');session=u.id;renderNav();closeAllModals();
-if(role==='teacher'){toast('تم إرسال طلبك مع البطاقة — بانتظار مراجعة الإدارة','warn');go('teach')}else{toast('تم إنشاء حسابك بنجاح');go('videos')}}
+if(role==='teacher'){toast('تم إرسال طلبك مع البطاقة — بانتظار مراجعة الإدارة','warn');go('teach')}else{toast('تم إنشاء حسابك بنجاح — كل محتوى صفك جاهز');go('videos')}}
 hashPass(pass).then(function(h){
 if(role==='teacher'){var tid=uid();compressImage(idInp.files[0],1200,.8).then(function(blob){
 if(CLOUD){mediaPut('teacher-ids/'+tid+'.jpg',blob).then(function(r){create(h,r)}).catch(function(){toast('فشل رفع البطاقة','err')})}
@@ -788,7 +830,6 @@ else create(h,null)})}}
 
 function logout(){if(ER&&!ER.ended)finishExam(false,'تم التسليم تلقائيًا');session=null;persist(['session']);qs('#notif-panel').classList.remove('open');renderNav();go('home');toast('تم تسجيل الخروج','warn')}
 
-/* حذف الحساب — نسخة مُصلحة تعمل في الوضعين وتحفظ فورًا */
 function deleteMyAccount(){var u=me();if(!u){toast('سجّل الدخول الأول','warn');return}
 if(u.role==='admin'){toast('حساب الإدارة مش بيتحذف من هنا — استخدم تصفير المنصة','warn');return}
 confirmDlg('حذف الحساب نهائيًا','سيتم حذف حسابك ('+u.name+') وكل دفعاتك ونتائجك نهائيًا — لا يمكن الرجوع. متأكد؟','نعم، احذف حسابي').then(function(ok){
@@ -803,11 +844,10 @@ session=null;
 if(CLOUD){persist(['users','device','payments','results','notifications','session'])}
 else{saveLocal();try{localStorage.setItem('afth_users',JSON.stringify(users))}catch(_){}try{localStorage.setItem('afth_session','null')}catch(_){}}
 qs('#notif-panel').classList.remove('open');
-renderNav();go('home');
-toast('تم حذف حسابك نهائيًا','warn')})}
+renderNav();go('home');toast('تم حذف حسابك نهائيًا','warn')})}
 
 var curView='home',adminTab='overview',ER=null;
-var renders={home:renderHome,videos:renderVideos,exams:renderExams,payments:renderPayments,profile:renderProfile,teach:renderTeach,admin:renderAdmin,exam:function(){if(ER&&!ER.ended){renderExamShell()}else{ER=null;go('exams')}}};
+var renders={home:renderHome,videos:renderVideos,exams:renderExams,live:renderLive,news:renderNews,payments:renderPayments,profile:renderProfile,teach:renderTeach,admin:renderAdmin,exam:function(){if(ER&&!ER.ended){renderExamShell()}else{ER=null;go('exams')}}};
 function go(name){
 if(ER&&!ER.ended&&name!=='exam'){finishExam(false,'تم التسليم تلقائيًا لأنك غادرت شاشة الامتحان');toast('تم تسليم الامتحان تلقائيًا','warn')}
 var u=me();var ok=true;
@@ -816,12 +856,14 @@ else if(name==='profile')ok=!!u;
 else if(name==='teach')ok=!!u&&u.role==='teacher';
 else if(name==='admin')ok=!!u&&u.role==='admin';
 else if(name==='exam')ok=!!ER&&!ER.ended;
+else if(name==='live'||name==='news')ok=!!u;
 if(!ok){if(name==='exam'){name='exams'}else if(!u){toast('سجّل الدخول أولًا','warn');openLogin();return}else{toast('مالكش صلاحية الوصول','warn');name='home'}}
 curView=name;$$('.view').forEach(function(v){v.classList.remove('on')});var sec=qs('#view-'+name);if(sec)sec.classList.add('on');window.scrollTo(0,0);if(renders[name])renders[name]();afterBoot()}
 
 function renderNav(){var u=me();
 var pend=(payments||[]).filter(function(p){return p.status==='pending'}).length+(users||[]).filter(function(x){return x.role==='teacher'&&!x.approved}).length+(resets||[]).filter(function(r){return r.status==='pending'}).length;
 var nav='<a data-view="home">الرئيسية</a><a data-view="videos">الحصص</a><a data-view="exams">الامتحانات</a>';
+if(u){nav+='<a data-view="live">البث المباشر</a><a data-view="news">الأخبار</a>'}
 if(u&&u.role==='student')nav+='<a data-view="payments">الدفعات</a>';
 if(u&&u.role==='teacher')nav+='<a data-view="teach">لوحة المدرّس</a>';
 if(u&&u.role==='admin')nav+='<a data-view="admin">لوحة الإدارة'+(pend?'<i class="dotb">'+pend+'</i>':'')+'</a>';
@@ -847,19 +889,25 @@ if(p)p.textContent=on?'امتحانات بمؤقّت تحت مراقبة ذكي�
 if(w)w.innerHTML=on?'<i data-lucide="info"></i> الكوينز بتُمنح على أول محاولة لكل امتحان فقط.':'<i data-lucide="info"></i> النتيجة والمراجعة الكاملة بتظهر لك مباشرة بعد التسليم.';icons()}
 
 function countUp(el,target){var t0=performance.now(),dur=900;function f(t){var p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e).toLocaleString('en-US');if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+function activeLive(){return(lives||[]).filter(function(l){return l.active})}
 function renderHome(){applyCoinsUI();
 var students=users.filter(function(u){return u.role==='student'}).length;
 var stats=[[videos.length,'حصة مسجّلة'],[exams.length,'امتحان إلكتروني'],[students,'طالب منضم']];
 if(coinsOn())stats.push([users.reduce(function(a,u){return a+(u.coins||0)},0),'كوين مُنح']);
 var hs=qs('#home-stats');if(hs){hs.innerHTML=stats.map(function(s,i){return'<div><b id="hs-'+i+'">0</b><span>'+s[1]+'</span></div>'}).join('');stats.forEach(function(s,i){var el=qs('#hs-'+i);if(el)countUp(el,s[0])})}
 var subs=[];videos.forEach(function(v){if(v.subject&&subs.indexOf(v.subject)===-1)subs.push(v.subject)});
-var words=subs.length?subs:['حصص مسجّلة','امتحانات إلكترونية','مراقبة ضد الغش','دعم مباشر'];
+var words=subs.length?subs:['حصص مسجّلة','امتحانات إلكترونية','بث مباشر','مراقبة ضد الغش'];
 if(coinsOn())words=words.concat(['نظام كوينز']);
 var items=words.map(function(s){return'<span class="tk"><span class="dia"></span>'+esc(s)+'</span>'}).join('');
 var tk=qs('#ticker-in');if(tk)tk.innerHTML=items+items;
-var top=videos.slice().sort(function(a,b){return b.created-a.created}).slice(0,3);
-var isAdm=me()&&me().role==='admin';
-var hv=qs('#home-videos');if(hv)hv.innerHTML=top.length?top.map(function(v,i){return videoRowHTML(v,{feat:i===0})}).join(''):emptyHTML('film',isAdm?'المنصة فاضية — ادخل لوحة الإدارة واضغط «إضافة حصة»':'لسه مفيش حصص منشورة — قريبًا');
+var u=me();
+var act=u?activeLive().filter(function(l){return gradeOK(l)}):[];
+var liveSec=qs('#home-live-sec'),liveBox=qs('#home-live-box');
+if(liveSec&&liveBox){
+if(u&&act.length){liveSec.style.display='block';liveBox.innerHTML=act.map(function(l){var tch=users.find(function(x){return x.id===l.author});return'<div class="post-card"><div class="post-head"><span class="live-chip"><span class="live-dot"></span> بث مباشر الآن</span><span style="color:var(--ink2);font-size:13px">'+esc(tch?tch.name:'مدرّس')+' · '+esc(l.grade==='الكل'?'كل الصفوف':l.grade)+'</span></div><h3 style="margin-bottom:6px">'+esc(l.title)+'</h3>'+(l.desc?'<p style="color:var(--ink2);font-size:14px;margin-bottom:12px">'+esc(l.desc)+'</p>':'')+'<button class="btn green sm" onclick="watchLive(\''+l.id+'\')"><i data-lucide="play"></i> افتح البث الآن</button></div>'}).join('')}
+else{liveSec.style.display='none'}}
+var top=videos.slice().sort(function(a,b){return b.created-a.created}).filter(function(v){return!u||gradeOK(v)}).slice(0,3);
+var hv=qs('#home-videos');if(hv)hv.innerHTML=top.length?top.map(function(v,i){return videoRowHTML(v,{feat:i===0})}).join(''):emptyHTML('film','لسه مفيش حصص منشورة — قريبًا');
 afterBoot()}
 
 var tickCodes=['MATH-7K2Q','PHYS-9X4M','CHEM-3B8T','ARAB-5R1N'];var ti=0;
@@ -880,7 +928,7 @@ if(!v.price||v.price<=0)return'open';
 if((u.ownedLessons||[]).indexOf(v.id)!==-1)return'open';
 if((u.pendingLessons||[]).indexOf(v.id)!==-1)return'owned-wait';
 return'locked'}
-function ytId(url){var m=String(url||'').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);return m?m[1]:null}
+function ytId(url){var m=String(url||'').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/))([\w-]{11})/);return m?m[1]:null}
 function cmtCount(vid){return comments.filter(function(c){return c.vid===vid}).length}
 function thumbHTML(v,veiled){var yt=ytId(v.url);var letter=esc((v.title||'؟').trim().charAt(0));var blur=veiled?' style="filter:brightness(.55)"':' loading="lazy"';var media='';
 if(v.coverURL)media='<img src="'+v.coverURL+'"'+blur+' alt="">';
@@ -893,18 +941,20 @@ else if(a==='owned-wait'){btn='<button class="btn sm" disabled><i data-lucide="c
 else{btn='<button class="btn green sm" onclick="openBuyModal(\''+v.id+'\')"><i data-lucide="shopping-cart"></i> ادفع '+v.price+' ج لفتحها</button>';hint='<span class="hintline">حصة مدفوعة — '+v.price+' ج</span>'}
 var priceChip=(typeof v.price==='number'&&v.price>0)?'<span class="chip pend"><i data-lucide="tag"></i> '+v.price+' ج</span>':'<span class="chip free">مجانًا</span>';
 var cc=cmtCount(v.id);var cmtChip=cc?'<span class="chip"><i data-lucide="message-circle"></i> '+cc+'</span>':'';
-return'<article class="vrow '+(opt.feat?'feat':'')+'">'+thumbHTML(v,a==='guest'?'guest':a==='locked'?'locked':null)+'<div class="vinfo"><div class="vmeta"><span class="chip sj">'+esc(v.subject)+'</span>'+priceChip+cmtChip+'<span style="color:var(--ink2)">'+fmtDate(v.created)+'</span></div><h3 onclick="playVideo(\''+v.id+'\')">'+esc(v.title)+'</h3>'+(v.desc?'<p class="vdesc">'+esc(v.desc)+'</p>':'')+'<div class="vfoot">'+btn+hint+'</div></div></article>'}
+return'<article class="vrow '+(opt.feat?'feat':'')+'">'+thumbHTML(v,a==='guest'?'guest':a==='locked'?'locked':null)+'<div class="vinfo"><div class="vmeta"><span class="chip sj">'+esc(v.subject)+'</span><span class="chip">'+esc(v.grade==='الكل'?'كل الصفوف':v.grade)+'</span>'+priceChip+cmtChip+'<span style="color:var(--ink2)">'+fmtDate(v.created)+'</span></div><h3 onclick="playVideo(\''+v.id+'\')">'+esc(v.title)+'</h3>'+(v.desc?'<p class="vdesc">'+esc(v.desc)+'</p>':'')+'<div class="vfoot">'+btn+hint+'</div></div></article>'}
 function renderVideos(){var subs=['الكل'];videos.forEach(function(v){if(v.subject&&subs.indexOf(v.subject)===-1)subs.push(v.subject)});
 var html=subs.map(function(s){return'<button class="fchip '+(vState.subj===s?'on':'')+'" onclick="vState.subj=this.textContent;renderVideos()">'+esc(s)+'</button>'}).join('');
 html+='<span class="grow"></span><select class="fselect" onchange="vState.kind=this.value;applyVideoFilters()"><option value="الكل"'+(vState.kind==='الكل'?' selected':'')+'>كل الحصص</option><option value="free"'+(vState.kind==='free'?' selected':'')+'>المجانية</option><option value="paid"'+(vState.kind==='paid'?' selected':'')+'>المدفوعة</option></select>';
 qs('#v-filters').innerHTML=html;applyVideoFilters()}
-function applyVideoFilters(){var list=videos.slice().sort(function(a,b){return b.created-a.created});var q=vState.q.trim();
+function applyVideoFilters(){var u=me();var list=videos.slice().sort(function(a,b){return b.created-a.created}).filter(function(v){return u&&gradeOK(v)});
+var q=vState.q.trim();
 if(q)list=list.filter(function(v){return(v.title+' '+v.subject+' '+(v.desc||'')).indexOf(q)!==-1});
 if(vState.subj!=='الكل')list=list.filter(function(v){return v.subject===vState.subj});
 if(vState.kind==='free')list=list.filter(function(v){return!v.price||v.price<=0});
 if(vState.kind==='paid')list=list.filter(function(v){return v.price&&v.price>0});
-var isAdm=me()&&me().role==='admin';var box=qs('#videos-list');if(!box)return;
-box.innerHTML=list.length?list.map(function(v,i){return videoRowHTML(v,{feat:i===0&&!vState.q})}).join(''):((q||vState.subj!=='الكل')?emptyHTML('search','مفيش نتائج مطابقة'):emptyHTML('film',isAdm?'مفيش حصص لسه — اضغط «إضافة حصة» من لوحة الإدارة':'لسه مفيش حصص منشورة'));
+var box=qs('#videos-list');if(!box)return;
+if(!u){box.innerHTML=emptyHTML('lock','سجّل الدخول لعرض حصص صفك');afterBoot();return}
+box.innerHTML=list.length?list.map(function(v,i){return videoRowHTML(v,{feat:i===0&&!vState.q})}).join(''):((q||vState.subj!=='الكل')?emptyHTML('search','مفيش نتائج مطابقة'):emptyHTML('film','لسه مفيش حصص لصفك — قريبًا'));
 afterBoot()}
 function playVideo(id){var v=null;for(var i=0;i<videos.length;i++){if(videos[i].id===id){v=videos[i];break}}if(!v)return;
 var a=videoAccess(v);
@@ -913,7 +963,6 @@ if(a==='owned-wait'){toast('دفعتك للحصة دي بانتظار موافق
 if(a==='locked'){openBuyModal(v);return}
 openPlayer(v)}
 
-/* شراء الحصة المدفوعة — الاسم والسعر أوتوماتيك */
 function openBuyModal(v){var u=me();if(!u||u.role!=='student'){toast('سجّل الدخول كطالب عشان تشتري الحصة','warn');openLogin();return}
 if((u.pendingLessons||[]).indexOf(v.id)!==-1){toast('دفعتك للحصة دي قيد المراجعة — استنى الإشعار','warn');return}
 openModal('<div class="m-head"><h3>شراء الحصة</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div>'+
@@ -953,15 +1002,99 @@ if(replyTo){var parent=comments.find(function(x){return x.id===replyTo.id});if(p
 replyTo=null;var v=findVid(vid);if(v)renderCmts(v);return false}
 function findVid(id){return videos.find(function(v){return v.id===id})||null}
 
+/* ===== البث المباشر ===== */
+function liveEmbed(url){var yt=ytId(url);
+if(yt)return'<iframe src="https://www.youtube.com/embed/'+yt[1]+'?autoplay=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+if(/facebook\.com|fb\.watch/i.test(url))return'<iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(url)+'&autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+return'<iframe src="'+esc(url)+'" allow="autoplay; fullscreen" allowfullscreen></iframe>'}
+function renderLive(){var u=me();if(!u){qs('#live-list').innerHTML=emptyHTML('lock','سجّل الدخول لمتابعة البث المباشر');afterBoot();return}
+var isTeacher=u.role==='teacher'||u.role==='admin';
+var act=activeLive().filter(function(l){return isTeacher||gradeOK(l)});
+var html='';
+if(isTeacher){
+var mine=activeLive().filter(function(l){return l.author===u.id});
+html+='<div class="pcard" style="margin-bottom:22px"><h3><i data-lucide="radio"></i> البث بتاعك</h3>';
+html+=mine.length?mine.map(function(l){return'<div class="kv"><span>'+esc(l.title)+' ('+esc(l.grade==='الكل'?'كل الصفوف':l.grade)+')</span><b><span class="chip no" style="margin-inline-end:8px">مستمر الآن</span><button class="btn red sm" onclick="stopLive(\''+l.id+'\')">إيقاف البث</button></b></div>'}).join(''):'<p style="color:var(--ink2);font-size:14px">مفيش بث شغّال حاليًا — ابدأ واحد من الزر تحت.</p>';
+html+='<div style="margin-top:14px"><button class="btn green" onclick="openLiveForm()"><i data-lucide="radio"></i> ابدأ بثًا مباشرًا</button></div></div>'}
+html+='<div class="adm-head-row"><h3>البث المتاح لصفك ('+act.length+')</h3></div>';
+html+=act.length?act.map(function(l){var tch=users.find(function(x){return x.id===l.author});
+return'<div class="post-card"><div class="post-head"><span class="live-chip"><span class="live-dot"></span> بث مباشر الآن</span><span class="post-date">'+esc(tch?tch.name:'مدرّس')+' · '+esc(l.grade==='الكل'?'كل الصفوف':l.grade)+'</span></div><h3 style="margin-bottom:6px">'+esc(l.title)+'</h3>'+(l.desc?'<p style="color:var(--ink2);font-size:14px;margin-bottom:12px">'+esc(l.desc)+'</p>':'')+'<button class="btn green sm" onclick="watchLive(\''+l.id+'\')"><i data-lucide="play"></i> افتح البث الآن</button></div>'}).join(''):emptyHTML('radio','مفيش بث مباشر دلوقتي — لما المدرس يبدأ هتلاقيه هنا وفي الرئيسية بشارة حمراء');
+qs('#live-list').innerHTML=html;afterBoot()}
+function openLiveForm(){var u=me();if(!u||(u.role!=='teacher'&&u.role!=='admin'))return;
+var b=openModal('<div class="m-head"><h3>ابدأ بثًا مباشرًا</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div>'+
+'<form id="lf2" class="form">'+
+'<label>عنوان البث *<input name="title" required placeholder="مثال: مراجعة نهائية — رياضيات"></label>'+
+'<label>الصف المستهدف *<select name="grade" required>'+gradeOpts('الكل')+'</select></label>'+
+'<label>وصف مختصر (اختياري)<textarea name="desc" rows="2"></textarea></label>'+
+'<label>رابط البث المباشر * (YouTube Live / Facebook Live / Google Meet)<input name="url" required dir="ltr" style="text-align:left" placeholder="https://youtube.com/live/... أو https://meet.google.com/..."></label>'+
+'<div class="form-note"><i data-lucide="radio"></i> ابدأ البث من يوتيوب أو فيسبوك أو Meet الأول، انسخ رابطه والصقه هنا — الطلاب في الصف المختار هيشوفوا شارة حمراء «بث مباشر الآن» فورًا.</div>'+
+'<button class="btn green w100" type="submit"><i data-lucide="radio"></i> ابدأ البث</button>'+
+'</form>','wide');
+b.querySelector('#lf2').onsubmit=function(e){e.preventDefault();var fd=new FormData(e.target);var u=me();
+var rec={id:uid(),author:u.id,active:true,created:Date.now(),title:String(fd.get('title')||'').trim(),grade:String(fd.get('grade')||'الكل'),desc:String(fd.get('desc')||'').trim(),url:String(fd.get('url')||'').trim()};
+lives.unshift(rec);persist(['lives']);
+notifyGrade(rec.grade,'🔴 بث مباشر بدأ الآن: «'+rec.title+'» — افتحه من صفحة البث المباشر','ok');
+closeAllModals();toast('البث شغّال الآن — الطلاب هيشوفوا الشارة الحمراء');renderLive()}}
+function stopLive(id){var l=lives.find(function(x){return x.id===id});if(!l)return;
+l.active=false;persist(['lives']);
+notifyGrade(l.grade,'انتهى البث المباشر: «'+l.title+'»','info');
+toast('تم إيقاف البث');renderLive();if(curView==='home')renderHome()}
+function watchLive(id){var l=lives.find(function(x){return x.id===id});if(!l)return;
+if(!l.active){toast('البث ده اتوقف','warn');renderLive();return}
+openModal('<div class="m-head"><h3>'+esc(l.title)+'</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div><div class="player">'+liveEmbed(l.url)+'</div>'+(l.desc?'<p class="p-desc">'+esc(l.desc)+'</p>':''),'player-m')}
+
+/* ===== المنشورات ===== */
+var postImgBlob=null,postImgURL=null;
+function postPreview(inp){var box=qs('#post-prev');postImgBlob=null;if(!inp.files||!inp.files[0]){box.innerHTML='';return}
+compressImage(inp.files[0],1400,.8).then(function(blob){postImgBlob=blob;if(postImgURL)URL.revokeObjectURL(postImgURL);postImgURL=URL.createObjectURL(blob);box.innerHTML='<img src="'+postImgURL+'" alt="معاينة" style="max-height:180px;border-radius:10px;border:1.5px dashed var(--line2);display:block;margin-top:4px">'}).catch(function(){toast('تعذر قراءة الصورة','err')})}
+function renderNews(){var u=me();if(!u){qs('#news-list').innerHTML=emptyHTML('lock','سجّل الدخول لمتابعة منشورات صفك');afterBoot();return}
+var isStaff=u.role==='teacher'||u.role==='admin';
+var list=posts.slice().sort(function(a,b){return b.date-a.date}).filter(function(p){return isStaff||gradeOK(p)});
+var html='';
+if(isStaff){html+='<div class="pcard" style="margin-bottom:22px"><h3><i data-lucide="megaphone"></i> منشور جديد</h3>'+
+'<form id="pf" class="form" style="margin-top:10px">'+
+'<label>الصف المستهدف<select name="grade">'+gradeOpts('الكل')+'</select></label>'+
+'<label>نص المنشور *<textarea name="text" rows="3" required placeholder="اكتب الإعلان أو الواجب أو الملخص…"></textarea></label>'+
+'<label class="file-drop"><input type="file" id="post-img" accept="image/*" onchange="postPreview(this)"><i data-lucide="image"></i><span class="fn" id="post-img-name">صورة مرفقة (اختياري)<small>أي مقاس</small></span></label>'+
+'<div id="post-prev"></div>'+
+'<button class="btn green w100" type="submit"><i data-lucide="send"></i> نشر المنشور</button>'+
+'</form></div>'}
+html+=list.length?list.map(function(p){var tch=users.find(function(x){return x.id===p.author});
+var imgTag=p.imgURL?'<img class="post-img" src="'+p.imgURL+'" alt="">':(p.imgKey?'<img class="post-img" data-media="'+p.imgKey+'" src="'+PLACEHOLDER+'" alt="">':'');
+return'<div class="post-card"><div class="post-head"><div><b>'+esc(tch?tch.name:'مدرّس')+'</b><span class="chip" style="margin-inline-start:8px">'+esc(p.grade==='الكل'?'كل الصفوف':p.grade)+'</span></div><div style="display:flex;gap:8px;align-items:center"><span class="post-date">'+fmtFull(p.date)+'</span>'+(isStaff&&p.author===u.id?'<button class="ico-btn danger" style="width:32px;height:32px" title="حذف" onclick="delPost(\''+p.id+'\')"><i data-lucide="trash-2"></i></button>':'')+'</div></div><div class="post-body">'+esc(p.text)+'</div>'+imgTag+'</div>'}).join(''):emptyHTML('megaphone','لسه مفيش منشورات لصفك — أول ما المدرس ينشر هتلاقيها هنا مع إشعار');
+qs('#news-list').innerHTML=html;
+var pf=qs('#pf');
+if(pf)pf.onsubmit=function(e){e.preventDefault();var fd=new FormData(pf);var u2=me();if(!u2)return;
+var txt=String(fd.get('text')||'').trim();if(!txt)return;
+var grade=String(fd.get('grade')||'الكل');
+var imgInp=qs('#post-img');var imgF=imgInp?imgInp.files[0]:null;
+var rec={id:uid(),author:u2.id,grade:grade,text:txt,date:Date.now()};
+var finish=function(){posts.unshift(rec);persist(['posts']);notifyGrade(grade,'منشور جديد من '+u2.name+': '+txt.slice(0,60)+(txt.length>60?'…':''),'info');toast('تم نشر المنشور ووصل لطلاب الصف');postImgBlob=null;renderNews()};
+if(imgF){compressImage(imgF,1400,.8).then(function(blob){
+if(CLOUD){mediaPut('posts/'+rec.id+'.jpg',blob).then(function(r){rec.imgURL=r.url;rec.imgPath=r.path;finish()}).catch(function(){toast('فشل رفع الصورة','err')})}
+else{IDB.put('post_'+rec.id,blob).then(function(){rec.imgKey='post_'+rec.id;finish()})}
+}).catch(function(){finish()})}
+else finish()};
+var imgs=qs('#news-list')?$$('.mback [data-media], #news-list [data-media]'):[];
+imgs.forEach(function(el){var k=el.getAttribute('data-media');el.removeAttribute('data-media');mediaURL(k).then(function(u2){if(el.tagName==='IMG')el.src=u2||PLACEHOLDER})});
+afterBoot()}
+function delPost(id){var p=posts.find(function(x){return x.id===id});if(!p)return;var u=me();if(!u)return;
+if(u.role!=='admin'&&p.author!==u.id){toast('مش منشورك','warn');return}
+if(p.imgPath||p.imgKey)mediaDelPath(p.imgPath||p.imgKey);
+posts=posts.filter(function(x){return x.id!==id});persist(['posts']);toast('تم حذف المنشور','warn');if(curView==='news')renderNews();if(curView==='teach')renderTeach()}
+
+/* ===== الامتحانات ===== */
 var xState={q:'',subj:'الكل'};
 function renderExams(){var subs=['الكل'];exams.forEach(function(e){if(e.subject&&subs.indexOf(e.subject)===-1)subs.push(e.subject)});
 qs('#x-filters').innerHTML=subs.map(function(s){return'<button class="fchip '+(xState.subj===s?'on':'')+'" onclick="xState.subj=this.textContent;renderExams()">'+esc(s)+'</button>'}).join('');applyExamFilters()}
-function applyExamFilters(){var u=me();var list=exams.slice().sort(function(a,b){return b.created-a.created});var q=xState.q.trim();
+function applyExamFilters(){var u=me();var list=exams.slice().sort(function(a,b){return b.created-a.created}).filter(function(e){return u&&gradeOK(e)});
+var q=xState.q.trim();
 if(q)list=list.filter(function(e){return(e.title+' '+e.subject).indexOf(q)!==-1});
 if(xState.subj!=='الكل')list=list.filter(function(e){return e.subject===xState.subj});
-var isAdm=u&&u.role==='admin';var box=qs('#exams-list');if(!box)return;
-box.innerHTML=list.length?list.map(function(ex){var mine=u?results.filter(function(r){return r.uid===u.id&&r.eid===ex.id&&!r.disq}):[];var best=mine.length?Math.max.apply(null,mine.map(function(r){return r.score})):null;
-return'<div class="xrow"><span class="xico"><i data-lucide="clipboard-list"></i></span><div class="xinfo"><h3>'+esc(ex.title)+'</h3><div class="xmeta"><span class="chip sj">'+esc(ex.subject)+'</span><span><i data-lucide="clock"></i> '+ex.dur+' دقيقة</span><span><i data-lucide="list-checks"></i> '+ex.questions.length+' أسئلة</span>'+(coinsOn()?'<span class="coin"><i data-lucide="coins"></i> حتى '+ex.reward+' كوين</span>':'')+(best!==null?'<span class="chip '+(best>=50?'ok':'no')+'">أفضل درجة: '+best+'%</span>':'')+'</div></div><button class="btn '+(best!==null?'ghost':'green')+' sm" onclick="startExam(\''+ex.id+'\')"><i data-lucide="'+(best!==null?'rotate-ccw':'play')+'"></i> '+(u?(best!==null?'إعادة':'ابدأ'):'سجّل للبدء')+'</button></div>'}).join(''):emptyHTML('clipboard-list',isAdm?'مفيش امتحانات — اضغط «إنشاء امتحان» من لوحة الإدارة':'لسه مفيش امتحانات متاحة');
+var box=qs('#exams-list');if(!box)return;
+if(!u){box.innerHTML=emptyHTML('lock','سجّل الدخول لعرض امتحانات صفك');afterBoot();return}
+box.innerHTML=list.length?list.map(function(ex){var mine=results.filter(function(r){return r.uid===u.id&&r.eid===ex.id&&!r.disq});var best=mine.length?Math.max.apply(null,mine.map(function(r){return r.score})):null;
+return'<div class="xrow"><span class="xico"><i data-lucide="clipboard-list"></i></span><div class="xinfo"><h3>'+esc(ex.title)+'</h3><div class="xmeta"><span class="chip sj">'+esc(ex.subject)+'</span><span class="chip">'+esc(ex.grade==='الكل'?'كل الصفوف':ex.grade)+'</span><span><i data-lucide="clock"></i> '+ex.dur+' دقيقة</span><span><i data-lucide="list-checks"></i> '+ex.questions.length+' أسئلة</span>'+(coinsOn()?'<span class="coin"><i data-lucide="coins"></i> حتى '+ex.reward+' كوين</span>':'')+(best!==null?'<span class="chip '+(best>=50?'ok':'no')+'">أفضل درجة: '+best+'%</span>':'')+'</div></div><button class="btn '+(best!==null?'ghost':'green')+' sm" onclick="startExam(\''+ex.id+'\')"><i data-lucide="'+(best!==null?'rotate-ccw':'play')+'"></i> '+(best!==null?'إعادة':'ابدأ')+'</button></div>'}).join(''):emptyHTML('clipboard-list','لسه مفيش امتحانات لصفك — قريبًا');
 afterBoot()}
 
 var AR=['أ','ب','ج','د'];
@@ -1026,7 +1159,7 @@ if(!subj){toast('اكتب اسم الحصة أو المادة','err');return fal
 if(!amt||+amt<=0){toast('اكتب المبلغ المدفوع','err');return false}
 if(!payImgBlob){toast('ارفع صورة التحويل أولًا','err');return false}
 var id=uid();var rec={id:id,uid:u.id,uname:u.name,subject:subj,amount:amt,status:'pending',date:Date.now()};
-var vid=findVidByTitle(subj);if(vid&&vid.price>0)rec.lessonId=vid.id;
+var vid=findVidByTitle(subj);if(vid&&vid.price>0){rec.lessonId=vid.id;u.pendingLessons=u.pendingLessons||[];if(u.pendingLessons.indexOf(vid.id)===-1)u.pendingLessons.push(vid.id);persist(['users'])}
 if(CLOUD){rec.uploading=true;payments.unshift(rec);renderPayments();
 mediaPut('pays/'+id+'.jpg',payImgBlob).then(function(r){rec.imgURL=r.url;rec.mediaPath=r.path;delete rec.uploading;persist(['payments']);renderPayments();notifyAdmin('دفعة جديدة من '+u.name+' — «'+subj+'» بمبلغ '+amt+' ج','warn');toast('تم إرسال الدفعة — بانتظار مراجعة الإدارة')}).catch(function(){payments=payments.filter(function(p){return p.id!==id});persist(['payments']);renderPayments();toast('فشل رفع الصورة','err')});
 payImgBlob=null;return false}
@@ -1046,23 +1179,30 @@ function renderProfile(){var u=me();if(!u)return;var myRes=results.filter(functi
 var myOwned=(u.ownedLessons||[]).length;var myPending=(u.pendingLessons||[]).length;
 var hero=coinsOn()?'<div class="coin-hero"><i data-lucide="coins"></i><b>'+(u.coins||0)+'</b><span>رصيد الكوينز</span></div>':'<div class="coin-hero"><i data-lucide="monitor-play"></i><b>'+myOwned+'</b><span>حصة مدفوعة</span></div>';
 function resChip(r){return(r.disq?'<span class="chip no">ملغي</span>':'<span class="chip '+(r.score>=60?'ok':'no')+'">'+r.score+'%</span>')+(coinsOn()&&r.coins?'<span class="chip pend">+'+r.coins+' كوين</span>':'')}
-qs('#prof-body').innerHTML='<div class="prof-grid"><div>'+hero+'<div class="pcard" style="margin-top:22px;padding:8px 22px"><div class="kv"><span>الاسم</span><b>'+esc(u.name)+'</b></div><div class="kv"><span>البريد</span><b style="direction:ltr">'+esc(u.email)+'</b></div><div class="kv"><span>تاريخ الانضمام</span><b>'+fmtDate(u.created)+'</b></div><div class="kv"><span>حسابات هذا الجهاز</span><b>'+deviceAccounts.length+' من 2</b></div><div class="kv"><span>حصص مدفوعة</span><b>'+myOwned+'</b></div>'+(myPending?'<div class="kv"><span>دفاتر بانتظار الموافقة</span><b>'+myPending+'</b></div>':'')+'</div><div class="danger-zone"><h4><i data-lucide="triangle-alert"></i> منطقة الخطر</h4><p>حذف الحساب نهائي ويحرّرك مكان من حد الحسابين لهذا الجهاز.</p><button class="btn red sm" onclick="deleteMyAccount()"><i data-lucide="trash-2"></i> حذف حسابي نهائيًا</button></div></div><div><div class="pcard" style="margin-bottom:22px"><h3 style="font-size:17px;margin-bottom:12px"><i data-lucide="badge-check"></i> حصصي المدفوعة</h3>'+(myOwned?(u.ownedLessons||[]).map(function(vid){var v=findVid(vid);return v?'<div class="kv"><span>'+esc(v.title)+'</span><b style="color:var(--gold)">'+v.price+' ج</b></div>':''}).join(''):'<p style="color:var(--ink2);font-size:14px">لسه مشتريتش أي حصة.</p>')+'</div><div class="pcard"><h3 style="font-size:17px;margin-bottom:8px"><i data-lucide="trophy"></i> نتائج امتحاناتي</h3>'+(myRes.length?myRes.map(function(r){return'<div class="kv"><span>'+esc(r.etitle)+'<br><small style="color:var(--ink2)">'+fmtFull(r.date)+'</small></span><b style="display:flex;gap:8px;align-items:center">'+resChip(r)+'</b></div>'}).join(''):'<p style="color:var(--ink2);font-size:14px">لسه ما حلّيتش أي امتحان.</p>')+'</div></div></div>';
+qs('#prof-body').innerHTML='<div class="prof-grid"><div>'+hero+'<div class="pcard" style="margin-top:22px;padding:8px 22px"><div class="kv"><span>الاسم</span><b>'+esc(u.name)+'</b></div><div class="kv"><span>الصف الدراسي</span><b>'+esc(u.grade||'—')+'</b></div><div class="kv"><span>البريد</span><b style="direction:ltr">'+esc(u.email)+'</b></div><div class="kv"><span>تاريخ الانضمام</span><b>'+fmtDate(u.created)+'</b></div><div class="kv"><span>حصص مدفوعة</span><b>'+myOwned+'</b></div>'+(myPending?'<div class="kv"><span>دفاتر بانتظار الموافقة</span><b>'+myPending+'</b></div>':'')+'</div><div class="danger-zone"><h4><i data-lucide="triangle-alert"></i> منطقة الخطر</h4><p>حذف الحساب نهائي ويحرّرك مكان من حد الحسابين لهذا الجهاز.</p><button class="btn red sm" onclick="deleteMyAccount()"><i data-lucide="trash-2"></i> حذف حسابي نهائيًا</button></div></div><div><div class="pcard" style="margin-bottom:22px"><h3 style="font-size:17px;margin-bottom:12px"><i data-lucide="badge-check"></i> حصصي المدفوعة</h3>'+(myOwned?(u.ownedLessons||[]).map(function(vid){var v=findVid(vid);return v?'<div class="kv"><span>'+esc(v.title)+'</span><b style="color:var(--gold)">'+v.price+' ج</b></div>':''}).join(''):'<p style="color:var(--ink2);font-size:14px">لسه مشتريتش أي حصة.</p>')+'</div><div class="pcard"><h3 style="font-size:17px;margin-bottom:8px"><i data-lucide="trophy"></i> نتائج امتحاناتي</h3>'+(myRes.length?myRes.map(function(r){return'<div class="kv"><span>'+esc(r.etitle)+'<br><small style="color:var(--ink2)">'+fmtFull(r.date)+'</small></span><b style="display:flex;gap:8px;align-items:center">'+resChip(r)+'</b></div>'}).join(''):'<p style="color:var(--ink2);font-size:14px">لسه ما حلّيتش أي امتحان.</p>')+'</div></div></div>';
 afterBoot()}
 
 function renderTeach(){var u=me();if(!u||u.role!=='teacher')return;
-if(!u.approved){qs('#teach-body').innerHTML='<div class="state-panel"><span class="big-ic"><i data-lucide="hourglass"></i></span><h3>حسابك بانتظار موافقة الإدارة</h3><p>تم استلام طلبك'+(u.idURL||u.idKey?' مع صورة البطاقة ✅':'')+' — أول ما الإدارة توافق هتقدر ترفع حصصك.</p><button class="btn ghost sm" onclick="logout()">تسجيل الخروج</button></div>';afterBoot();return}
+if(!u.approved){qs('#teach-body').innerHTML='<div class="state-panel"><span class="big-ic"><i data-lucide="hourglass"></i></span><h3>حسابك بانتظار موافقة الإدارة</h3><p>تم استلام طلبك'+(u.idURL||u.idKey?' مع صورة البطاقة ✅':'')+' — أول ما الإدارة توافق هتقدر ترفع حصصك وتبث مباشر وتنشر.</p><button class="btn ghost sm" onclick="logout()">تسجيل الخروج</button></div>';afterBoot();return}
 var myVids=videos.filter(function(v){return v.author===u.id}).sort(function(a,b){return b.created-a.created});
 var myExams=exams.filter(function(e){return e.author===u.id}).sort(function(a,b){return b.created-a.created});
-var html='<div class="adm-top"><div><h2>أهلاً أ. '+esc(u.name.split(' ')[0])+'</h2></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn green sm" onclick="openVideoForm(renderTeach)"><i data-lucide="plus"></i> إضافة حصة</button><button class="btn sm" onclick="openExamBuilder(renderTeach)"><i data-lucide="clipboard-list"></i> إنشاء امتحان</button></div></div><div class="adm-head-row"><h3>حصصي ('+myVids.length+')</h3></div>';
-html+=myVids.length?'<div class="tscroll"><table class="tbl"><tr><th>الحصة</th><th>المادة</th><th>السعر</th><th>المشترين</th><th>النشر</th><th></th></tr>'+myVids.map(function(v){var buyers=users.filter(function(s){return s.ownedLessons&&s.ownedLessons.indexOf(v.id)!==-1}).length;
-return'<tr><td><b>'+esc(v.title)+'</b></td><td>'+esc(v.subject)+'</td><td>'+(v.price>0?v.price+' ج':'مجانًا')+'</td><td>'+buyers+'</td><td>'+fmtDate(v.created)+'</td><td><div class="acts"><button class="ico-btn edit" title="تعديل" onclick="openVideoForm(renderTeach,\''+v.id+'\')"><i data-lucide="pencil"></i></button><button class="ico-btn danger" title="حذف" onclick="delVideo(\''+v.id+'\',renderTeach)"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('film','لم تضف أي حصة بعد');
+var myLive=activeLive().filter(function(l){return l.author===u.id});
+var myPosts=posts.filter(function(p){return p.author===u.id}).sort(function(a,b){return b.date-a.date});
+var html='<div class="adm-top"><div><h2>أهلاً أ. '+esc(u.name.split(' ')[0])+'</h2></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn green sm" onclick="openVideoForm(renderTeach)"><i data-lucide="plus"></i> إضافة حصة</button><button class="btn sm" onclick="openExamBuilder(renderTeach)"><i data-lucide="clipboard-list"></i> إنشاء امتحان</button><button class="btn red sm" onclick="openLiveForm()"><i data-lucide="radio"></i> بث مباشر</button><button class="btn admin-btn sm" onclick="go(\'news\')"><i data-lucide="megaphone"></i> منشور جديد</button></div></div>';
+html+='<div class="adm-head-row"><h3>بثّي المباشر ('+myLive.length+')</h3></div>';
+html+=myLive.length?'<div class="tscroll"><table class="tbl"><tr><th>العنوان</th><th>الصف</th><th>البداية</th><th></th></tr>'+myLive.map(function(l){return'<tr><td><b>'+esc(l.title)+'</b></td><td>'+esc(l.grade==='الكل'?'كل الصفوف':l.grade)+'</td><td>'+fmtFull(l.created)+'</td><td><div class="acts"><button class="btn red sm" onclick="stopLive(\''+l.id+'\')"><i data-lucide="square"></i> إيقاف</button></div></td></tr>'}).join('')+'</table></div>':'<p style="color:var(--ink2);font-size:14px">مفيش بث شغّال — ابدأ واحد من الزر فوق، وهتشوفه في صفحة «البث المباشر».</p>';
+html+='<div class="adm-head-row"><h3>حصصي ('+myVids.length+')</h3></div>';
+html+=myVids.length?'<div class="tscroll"><table class="tbl"><tr><th>الحصة</th><th>المادة</th><th>الصف</th><th>السعر</th><th>المشترين</th><th>النشر</th><th></th></tr>'+myVids.map(function(v){var buyers=users.filter(function(s){return s.ownedLessons&&s.ownedLessons.indexOf(v.id)!==-1}).length;
+return'<tr><td><b>'+esc(v.title)+'</b></td><td>'+esc(v.subject)+'</td><td>'+esc(v.grade==='الكل'?'كل الصفوف':v.grade)+'</td><td>'+(v.price>0?v.price+' ج':'مجانًا')+'</td><td>'+buyers+'</td><td>'+fmtDate(v.created)+'</td><td><div class="acts"><button class="ico-btn edit" title="تعديل" onclick="openVideoForm(renderTeach,\''+v.id+'\')"><i data-lucide="pencil"></i></button><button class="ico-btn danger" title="حذف" onclick="delVideo(\''+v.id+'\',renderTeach)"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('film','لم تضف أي حصة بعد');
 html+='<div class="adm-head-row"><h3>امتحاناتي ('+myExams.length+')</h3></div>';
-html+=myExams.length?'<div class="tscroll"><table class="tbl"><tr><th>الامتحان</th><th>الأسئلة</th><th>المحاولات</th><th></th></tr>'+myExams.map(function(e){return'<tr><td><b>'+esc(e.title)+'</b></td><td>'+e.questions.length+'</td><td>'+results.filter(function(r){return r.eid===e.id}).length+'</td><td><div class="acts"><button class="ico-btn edit" onclick="openExamBuilder(renderTeach,\''+e.id+'\')"><i data-lucide="pencil"></i></button><button class="ico-btn danger" onclick="delExam(\''+e.id+'\',renderTeach)"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('clipboard-list','لم تنشئ أي امتحان بعد');
+html+=myExams.length?'<div class="tscroll"><table class="tbl"><tr><th>الامتحان</th><th>الصف</th><th>الأسئلة</th><th>المحاولات</th><th></th></tr>'+myExams.map(function(e){return'<tr><td><b>'+esc(e.title)+'</b></td><td>'+esc(e.grade==='الكل'?'كل الصفوف':e.grade)+'</td><td>'+e.questions.length+'</td><td>'+results.filter(function(r){return r.eid===e.id}).length+'</td><td><div class="acts"><button class="ico-btn edit" onclick="openExamBuilder(renderTeach,\''+e.id+'\')"><i data-lucide="pencil"></i></button><button class="ico-btn danger" onclick="delExam(\''+e.id+'\',renderTeach)"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('clipboard-list','لم تنشئ أي امتحان بعد');
+html+='<div class="adm-head-row"><h3>منشوراتي ('+myPosts.length+')</h3></div>';
+html+=myPosts.length?'<div class="pcard" style="max-height:300px;overflow:auto">'+myPosts.map(function(p){return'<div class="kv"><span>'+esc(p.text.slice(0,70))+(p.text.length>70?'…':'')+'<br><small style="color:var(--ink2)">'+esc(p.grade==='الكل'?'كل الصفوف':p.grade)+' · '+fmtDate(p.date)+'</small></span><button class="ico-btn danger" style="width:32px;height:32px" onclick="delPost(\''+p.id+'\')"><i data-lucide="trash-2"></i></button></div>'}).join('')+'</div>':'<p style="color:var(--ink2);font-size:14px">لم تنشر شيئًا بعد — من زر «منشور جديد» فوق.</p>';
 qs('#teach-body').innerHTML=html;afterBoot()}
 
 function toggleCoins(){settings.coins=!settings.coins;persist(['settings']);renderNav();renderAdmin();toast(settings.coins?'تم تفعيل نظام الكوينز':'تم إيقاف نظام الكوينز','warn')}
 function renderAdmin(){var tabs=[['overview','نظرة عامة','layout-dashboard'],['payments','الدفعات','wallet'],['students','الطلاب','users'],['teachers','المدرسون','graduation-cap'],['videos','الحصص','film'],['exams','الامتحانات','clipboard-list'],['results','النتائج','trophy'],['resets','طلبات الباس','key-round'],['settings','الإعدادات','settings']];
-qs('#admin-body').innerHTML='<div class="adm-top"><div><h2>لوحة الإدارة</h2></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn green sm" onclick="openVideoForm(function(){adminTab=\'videos\';renderAdmin();})"><i data-lucide="plus"></i> إضافة حصة</button><button class="btn sm" onclick="openExamBuilder(function(){adminTab=\'exams\';renderAdmin();})"><i data-lucide="clipboard-list"></i> إنشاء امتحان</button><button class="btn red sm" onclick="factoryReset()"><i data-lucide="rotate-ccw"></i> تصفير المنصة</button></div></div><div class="set-card"><div class="st"><b><i data-lucide="coins"></i> نظام الكوينز</b><p>نظام اختياري — لما تقفله يختفي من كل الصفحات.</p></div><button class="sw '+(coinsOn()?'on':'off')+'" onclick="toggleCoins()"><span class="track"></span><span>'+(coinsOn()?'مُفعّل':'مُعطّل')+'</span></button></div><div class="adm-tabs">'+tabs.map(function(t){return'<button class="'+(adminTab===t[0]?'on':'')+'" onclick="setTab(\''+t[0]+'\')"><i data-lucide="'+t[2]+'"></i> '+t[1]+'</button>'}).join('')+'</div><div id="adm-body-tab"></div>';
+qs('#admin-body').innerHTML='<div class="adm-top"><div><h2>لوحة الإدارة</h2></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn green sm" onclick="openVideoForm(function(){adminTab=\'videos\';renderAdmin();})"><i data-lucide="plus"></i> إضافة حصة</button><button class="btn sm" onclick="openExamBuilder(function(){adminTab=\'exams\';renderAdmin();})"><i data-lucide="clipboard-list"></i> إنشاء امتحان</button><button class="btn red sm" onclick="openLiveForm()"><i data-lucide="radio"></i> بث مباشر</button><button class="btn red sm" onclick="factoryReset()"><i data-lucide="rotate-ccw"></i> تصفير المنصة</button></div></div><div class="set-card"><div class="st"><b><i data-lucide="coins"></i> نظام الكوينز</b><p>نظام اختياري — لما تقفله يختفي من كل الصفحات.</p></div><button class="sw '+(coinsOn()?'on':'off')+'" onclick="toggleCoins()"><span class="track"></span><span>'+(coinsOn()?'مُفعّل':'مُعطّل')+'</span></button></div><div class="adm-tabs">'+tabs.map(function(t){return'<button class="'+(adminTab===t[0]?'on':'')+'" onclick="setTab(\''+t[0]+'\')"><i data-lucide="'+t[2]+'"></i> '+t[1]+'</button>'}).join('')+'</div><div id="adm-body-tab"></div>';
 renderAdminTab();afterBoot()}
 function setTab(t){adminTab=t;renderAdmin()}
 function idImgTag(u){if(u.idURL)return'<img class="id-thumb" src="'+u.idURL+'" onclick="openIdImage(\''+u.id+'\')" alt="بطاقة">';return'<img class="id-thumb" src="'+PLACEHOLDER+'" data-media="'+(u.idKey||'')+'" onclick="openIdImage(\''+u.id+'\')" alt="بطاقة">'}
@@ -1092,17 +1232,17 @@ html+=okd.length?'<div class="tscroll"><table class="tbl"><tr><th>الاسم</th
 box.innerHTML=html}
 else if(adminTab==='videos'){var list=videos.slice().sort(function(a,b){return b.created-a.created});
 var html='<div class="adm-head-row"><h3>إدارة الحصص ('+list.length+')</h3><button class="btn green sm" onclick="openVideoForm(function(){adminTab=\'videos\';renderAdmin();})"><i data-lucide="plus"></i> إضافة حصة</button></div>';
-html+=list.length?'<div class="tscroll"><table class="tbl"><tr><th>الحصة</th><th>المادة</th><th>السعر</th><th>المشترين</th><th>الوسائط</th><th>الناشر</th><th></th></tr>'+list.map(function(v){var a=null;for(var i=0;i<users.length;i++){if(users[i].id===v.author){a=users[i];break}}var buyers=users.filter(function(s){return s.ownedLessons&&s.ownedLessons.indexOf(v.id)!==-1}).length;var media=[];if(v.vurl||v.mediaKey)media.push('فيديو');if(v.coverURL||v.coverKey)media.push('غلاف');if(v.attachURL||v.attachKey)media.push('مرفق');
-return'<tr><td><b>'+esc(v.title)+'</b></td><td>'+esc(v.subject)+'</td><td>'+(v.price>0?'<b style="color:var(--gold)">'+v.price+' ج</b>':'مجانًا')+'</td><td>'+buyers+'</td><td>'+(media.length?media.join(' + '):'رابط')+'</td><td>'+(a?esc(a.name):'—')+'</td><td><div class="acts"><button class="ico-btn edit" onclick="openVideoForm(function(){adminTab=\'videos\';renderAdmin();},\''+v.id+'\')"><i data-lucide="pencil"></i></button><button class="ico-btn danger" onclick="delVideo(\''+v.id+'\',function(){adminTab=\'videos\';renderAdmin();})"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('film','لا توجد حصص');
+html+=list.length?'<div class="tscroll"><table class="tbl"><tr><th>الحصة</th><th>المادة</th><th>الصف</th><th>السعر</th><th>المشترين</th><th>الوسائط</th><th>الناشر</th><th></th></tr>'+list.map(function(v){var a=null;for(var i=0;i<users.length;i++){if(users[i].id===v.author){a=users[i];break}}var buyers=users.filter(function(s){return s.ownedLessons&&s.ownedLessons.indexOf(v.id)!==-1}).length;var media=[];if(v.vurl||v.mediaKey)media.push('فيديو');if(v.coverURL||v.coverKey)media.push('غلاف');if(v.attachURL||v.attachKey)media.push('مرفق');
+return'<tr><td><b>'+esc(v.title)+'</b></td><td>'+esc(v.subject)+'</td><td>'+esc(v.grade==='الكل'?'كل الصفوف':v.grade)+'</td><td>'+(v.price>0?'<b style="color:var(--gold)">'+v.price+' ج</b>':'مجانًا')+'</td><td>'+buyers+'</td><td>'+(media.length?media.join(' + '):'رابط')+'</td><td>'+(a?esc(a.name):'—')+'</td><td><div class="acts"><button class="ico-btn edit" onclick="openVideoForm(function(){adminTab=\'videos\';renderAdmin();},\''+v.id+'\')"><i data-lucide="pencil"></i></button><button class="ico-btn danger" onclick="delVideo(\''+v.id+'\',function(){adminTab=\'videos\';renderAdmin();})"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('film','لا توجد حصص');
 box.innerHTML=html}
 else if(adminTab==='exams'){var list=exams.slice().sort(function(a,b){return b.created-a.created});
 var html='<div class="adm-head-row"><h3>إدارة الامتحانات ('+list.length+')</h3><button class="btn green sm" onclick="openExamBuilder(function(){adminTab=\'exams\';renderAdmin();})"><i data-lucide="plus"></i> امتحان جديد</button></div>';
-html+=list.length?'<div class="tscroll"><table class="tbl"><tr><th>الامتحان</th><th>المادة</th><th>الأسئلة</th><th>المدة</th><th>المحاولات</th><th></th></tr>'+list.map(function(e){return'<tr><td><b>'+esc(e.title)+'</b></td><td>'+esc(e.subject)+'</td><td>'+e.questions.length+'</td><td>'+e.dur+' د</td><td>'+results.filter(function(r){return r.eid===e.id}).length+'</td><td><div class="acts"><button class="ico-btn edit" onclick="openExamBuilder(function(){adminTab=\'exams\';renderAdmin();},\''+e.id+'\')"><i data-lucide="pencil"></i></button><button class="ico-btn danger" onclick="delExam(\''+e.id+'\',function(){adminTab=\'exams\';renderAdmin();})"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('clipboard-list','لا توجد امتحانات');
+html+=list.length?'<div class="tscroll"><table class="tbl"><tr><th>الامتحان</th><th>الصف</th><th>الأسئلة</th><th>المدة</th><th>المحاولات</th><th></th></tr>'+list.map(function(e){return'<tr><td><b>'+esc(e.title)+'</b></td><td>'+esc(e.grade==='الكل'?'كل الصفوف':e.grade)+'</td><td>'+e.questions.length+'</td><td>'+e.dur+' د</td><td>'+results.filter(function(r){return r.eid===e.id}).length+'</td><td><div class="acts"><button class="ico-btn edit" onclick="openExamBuilder(function(){adminTab=\'exams\';renderAdmin();},\''+e.id+'\')"><i data-lucide="pencil"></i></button><button class="ico-btn danger" onclick="delExam(\''+e.id+'\',function(){adminTab=\'exams\';renderAdmin();})"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('clipboard-list','لا توجد امتحانات');
 box.innerHTML=html}
 else if(adminTab==='results'){box.innerHTML='<div class="adm-head-row"><h3>نتائج الطلاب ومراقبة النزاهة</h3><div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><div class="searchbox" style="min-width:200px"><i data-lucide="search"></i><input id="rs-q" placeholder="ابحث باسم الطالب…" oninput="debRes()"></div><button class="btn ghost sm" onclick="exportResultsCSV()"><i data-lucide="download"></i> تصدير Excel</button></div></div><div id="res-tbl"></div>';renderResultsTable()}
 else if(adminTab==='resets'){var pendR=resets.filter(function(r){return r.status==='pending'});
-var html='<div class="adm-head-row"><h3>طلبات تغيير كلمة المرور ('+pendR.length+')</h3></div>';
-html+=pendR.length?'<div class="tscroll"><table class="tbl"><tr><th>البريد</th><th>الباس الجديد</th><th>التاريخ</th><th>إجراءات</th></tr>'+pendR.map(function(r){return'<tr><td style="direction:ltr;text-align:right">'+esc(r.email)+'</td><td><span style="direction:ltr;display:inline-block;background:var(--paper2);border:1.5px dashed var(--line2);border-radius:8px;padding:2px 10px;font-size:13px">'+esc(r.newpass)+'</span></td><td>'+fmtFull(r.date)+'</td><td><div class="acts"><button class="btn green sm" onclick="approveReset(\''+r.id+'\')"><i data-lucide="check"></i> قبول</button><button class="btn red sm" onclick="rejectReset(\''+r.id+'\')"><i data-lucide="x"></i> رفض</button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('key-round','مفيش طلبات معلّقة');
+var html='<div class="adm-head-row"><h3>طلبات تغيير كلمة المرور ('+pendR.length+')</h3><p style="font-size:12.5px;color:var(--ink2)">الطالب بيبعت بريده والباس الجديد — لو وافقت، الباس بيتغير فعليًا ويوصله إشعار.</p></div>';
+html+=pendR.length?'<div class="tscroll"><table class="tbl"><tr><th>الطالب</th><th>البريد</th><th>الباس الجديد</th><th>التاريخ</th><th>إجراءات</th></tr>'+pendR.map(function(r){return'<tr><td><b>'+esc(r.uname||'—')+'</b></td><td style="direction:ltr;text-align:right">'+esc(r.email)+'</td><td><span style="direction:ltr;display:inline-block;background:var(--paper2);border:1.5px dashed var(--line2);border-radius:8px;padding:2px 10px;font-size:13px">'+esc(r.newpass)+'</span></td><td>'+fmtFull(r.date)+'</td><td><div class="acts"><button class="btn green sm" onclick="approveReset(\''+r.id+'\')"><i data-lucide="check"></i> قبول وتغيير</button><button class="btn red sm" onclick="rejectReset(\''+r.id+'\')"><i data-lucide="x"></i> رفض</button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('key-round','مفيش طلبات معلّقة');
 box.innerHTML=html}
 else if(adminTab==='settings'){var adm=users.find(function(u){return u.role==='admin'})||{};
 box.innerHTML='<div class="set-card" style="margin-top:0"><div class="st"><b><i data-lucide="shield-check"></i> بيانات الدخول للإدارة</b><p>غيّر البريد أو كلمة المرور — بتتسجل مشفّرة SHA-256.</p></div><span class="chip '+(CLOUD?'ok':'pend')+'">'+(CLOUD?'متصل بالسحابة':'وضع محلي')+'</span></div><div class="pcard" style="margin-top:18px"><form id="ac-form" class="form"><div class="two"><label>بريد الإدارة الجديد<input name="email" type="email" required value="'+esc(adm.email||'')+'" dir="ltr" style="text-align:left"></label><label>كلمة المرور الحالية<input name="cur" type="password" required dir="ltr" style="text-align:left"></label></div><label>كلمة المرور الجديدة (فاضية = بدون تغيير)<input name="np" type="password" minlength="6" placeholder="6 أحرف على الأقل" dir="ltr" style="text-align:left"></label><button class="btn green w100" type="submit"><i data-lucide="save"></i> حفظ بيانات الإدارة</button></form></div><div class="pcard" style="margin-top:18px"><h3 style="font-size:17px;margin-bottom:10px"><i data-lucide="download"></i> النسخ الاحتياطي والاستعادة</h3><p style="font-size:13.5px;color:var(--ink2);margin-bottom:12px">نزّل نسخة كاملة من كل البيانات — وترجّعها في أي وقت.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn sm" onclick="exportBackup()"><i data-lucide="download"></i> تحميل نسخة احتياطية</button><label class="btn ghost sm" style="position:relative;overflow:hidden"><i data-lucide="upload"></i> استعادة نسخة<input type="file" id="bk-file" accept=".json" style="position:absolute;inset:0;opacity:0;cursor:pointer" onchange="importBackup(this)"></label></div></div>';
@@ -1127,7 +1267,7 @@ function renderStudentsTable(){var box=qs('#stu-tbl');if(!box)return;var q=qs('#
 var list=users.filter(function(u){return u.role==='student'});
 if(q)list=list.filter(function(u){return(u.name+' '+u.email).toLowerCase().indexOf(q.toLowerCase())!==-1});
 var paidSet=new Set(payments.filter(function(p){return p.status==='approved'}).map(function(p){return p.uid}));
-box.innerHTML=list.length?'<div class="tscroll"><table class="tbl"><tr><th>الطالب</th><th>البريد</th>'+(coinsOn()?'<th>الكوينز</th>':'')+'<th>حصص مدفوعة</th><th>دفعة معلّقة</th><th>حالة الدفع</th><th>التسجيل</th><th></th></tr>'+list.map(function(s){return'<tr><td><b>'+esc(s.name)+'</b></td><td style="direction:ltr;text-align:right">'+esc(s.email)+'</td>'+(coinsOn()?'<td><b style="color:var(--gold)">'+(s.coins||0)+'</b></td>':'')+'<td>'+((s.ownedLessons&&s.ownedLessons.length)?s.ownedLessons.length:'—')+'</td><td>'+((s.pendingLessons&&s.pendingLessons.length)?'<span class="chip pend">'+s.pendingLessons.length+'</span>':'—')+'</td><td>'+(paidSet.has(s.id)?'<span class="chip ok">مدفوع</span>':'<span class="chip no">غير مدفوع</span>')+'</td><td>'+fmtDate(s.created)+'</td><td><div class="acts"><button class="ico-btn edit" title="تعيين باس" onclick="adminSetPass(\''+s.id+'\')"><i data-lucide="key-round"></i></button><button class="ico-btn danger" title="حذف" onclick="adminDeleteUser(\''+s.id+'\')"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('users','مفيش طلاب');afterBoot()}
+box.innerHTML=list.length?'<div class="tscroll"><table class="tbl"><tr><th>الطالب</th><th>الصف</th><th>البريد</th>'+(coinsOn()?'<th>الكوينز</th>':'')+'<th>حصص مدفوعة</th><th>دفعة معلّقة</th><th>حالة الدفع</th><th>التسجيل</th><th></th></tr>'+list.map(function(s){return'<tr><td><b>'+esc(s.name)+'</b></td><td>'+esc(s.grade||'—')+'</td><td style="direction:ltr;text-align:right">'+esc(s.email)+'</td>'+(coinsOn()?'<td><b style="color:var(--gold)">'+(s.coins||0)+'</b></td>':'')+'<td>'+((s.ownedLessons&&s.ownedLessons.length)?s.ownedLessons.length:'—')+'</td><td>'+((s.pendingLessons&&s.pendingLessons.length)?'<span class="chip pend">'+s.pendingLessons.length+'</span>':'—')+'</td><td>'+(paidSet.has(s.id)?'<span class="chip ok">مدفوع</span>':'<span class="chip no">غير مدفوع</span>')+'</td><td>'+fmtDate(s.created)+'</td><td><div class="acts"><button class="ico-btn edit" title="تعيين باس" onclick="adminSetPass(\''+s.id+'\')"><i data-lucide="key-round"></i></button><button class="ico-btn danger" title="حذف" onclick="adminDeleteUser(\''+s.id+'\')"><i data-lucide="trash-2"></i></button></div></td></tr>'}).join('')+'</table></div>':emptyHTML('users','مفيش طلاب');afterBoot()}
 function renderResultsTable(){var box=qs('#res-tbl');if(!box)return;var q=qs('#rs-q')?qs('#rs-q').value.trim():'';
 var list=results.slice();if(q)list=list.filter(function(r){return r.uname.indexOf(q)!==-1});
 box.innerHTML=list.length?'<div class="tscroll"><table class="tbl"><tr><th>الطالب</th><th>الامتحان</th><th>الدرجة</th>'+(coinsOn()?'<th>الكوينز</th>':'')+'<th>مخالفات</th><th>النزاهة</th><th>مؤشر AI</th><th>التاريخ</th><th></th></tr>'+list.map(function(r){return'<tr><td><b>'+esc(r.uname)+'</b></td><td>'+esc(r.etitle)+'</td><td>'+(r.disq?'<span class="chip no">ملغي</span>':'<span class="chip '+(r.score>=60?'ok':'no')+'">'+r.score+'%</span>')+'</td>'+(coinsOn()?'<td>'+(r.coins||0)+'</td>':'')+'<td>'+r.vio+'</td><td>'+r.integ+'%</td><td>'+(r.bot?'<span class="chip no">مرتفع</span>':'<span class="chip ok">سليم</span>')+'</td><td>'+fmtFull(r.date)+'</td><td><button class="btn ghost sm" onclick="showResDetail(\''+r.id+'\')"><i data-lucide="eye"></i> السجل</button></td></tr>'}).join('')+'</table></div>':emptyHTML('trophy','لسه مفيش نتائج');afterBoot()}
@@ -1138,18 +1278,17 @@ openModal('<div class="m-head"><h3>سجل مراقبة: '+esc(r.uname)+'</h3><bu
 function downloadFile(name,content,mime){var blob=new Blob([content],{type:mime||'text/csv;charset=utf-8'});var u=URL.createObjectURL(blob);var a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000)}
 function toCSV(rows){return'\uFEFF'+rows.map(function(r){return r.map(function(c){c=String(c==null?'':c);return/[",\n]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c}).join(',')}).join('\r\n')}
 function exportPaymentsCSV(){var rows=[['الطالب','البريد','الحصة/المادة','المبلغ','الحالة','التاريخ']];payments.forEach(function(p){var u=users.find(function(x){return x.id===p.uid});rows.push([p.uname,u?u.email:'',p.subject,p.amount+' ج',p.status,fmtFull(p.date)])});downloadFile('الدفعات.csv',toCSV(rows));toast('تم التنزيل')}
-function exportStudentsCSV(){var paidSet=new Set(payments.filter(function(p){return p.status==='approved'}).map(function(p){return p.uid}));var rows=[['الاسم','البريد','الكوينز','حصص مدفوعة','حالة الدفع','التسجيل']];users.filter(function(u){return u.role==='student'}).forEach(function(s){rows.push([s.name,s.email,s.coins||0,(s.ownedLessons||[]).length,paidSet.has(s.id)?'مدفوع':'غير مدفوع',fmtDate(s.created)])});downloadFile('الطلاب.csv',toCSV(rows));toast('تم التنزيل')}
+function exportStudentsCSV(){var paidSet=new Set(payments.filter(function(p){return p.status==='approved'}).map(function(p){return p.uid}));var rows=[['الاسم','الصف','البريد','الكوينز','حصص مدفوعة','حالة الدفع','التسجيل']];users.filter(function(u){return u.role==='student'}).forEach(function(s){rows.push([s.name,s.grade||'',s.email,s.coins||0,(s.ownedLessons||[]).length,paidSet.has(s.id)?'مدفوع':'غير مدفوع',fmtDate(s.created)])});downloadFile('الطلاب.csv',toCSV(rows));toast('تم التنزيل')}
 function exportResultsCSV(){var rows=[['الطالب','الامتحان','الدرجة','الكوينز','مخالفات','النزاهة','مؤشر AI','التاريخ']];results.forEach(function(r){rows.push([r.uname,r.etitle,r.disq?'ملغي':r.score+'%',r.coins||0,r.vio,r.integ+'%',r.bot?'مرتفع':'سليم',fmtFull(r.date)])});downloadFile('النتائج.csv',toCSV(rows));toast('تم التنزيل')}
-function exportBackup(){var data={app:'afth-banna',version:5,date:Date.now(),users:users,videos:videos,exams:exams,payments:payments,results:results,comments:comments,notifications:notifications,resets:resets,settings:settings};downloadFile('backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(data,null,1),'application/json');toast('تم التنزيل')}
+function exportBackup(){var data={app:'afth-banna',version:7,date:Date.now(),users:users,videos:videos,exams:exams,payments:payments,results:results,comments:comments,notifications:notifications,resets:resets,lives:lives,posts:posts,settings:settings};downloadFile('backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(data,null,1),'application/json');toast('تم التنزيل')}
 function importBackup(inp){var f=inp.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){try{var d=JSON.parse(rd.result);if(!d||d.app!=='afth-banna')throw new Error('bad');
 confirmDlg('استعادة نسخة احتياطية','سيتم استبدال كل البيانات الحالية. متأكد؟','استعادة').then(function(ok){if(!ok)return;
-if(Array.isArray(d.users))users=d.users;if(Array.isArray(d.videos))videos=d.videos;if(Array.isArray(d.exams))exams=d.exams;if(Array.isArray(d.payments))payments=d.payments;if(Array.isArray(d.results))results=d.results;if(Array.isArray(d.comments))comments=d.comments;if(Array.isArray(d.notifications))notifications=d.notifications;if(Array.isArray(d.resets))resets=d.resets;if(d.settings&&typeof d.settings==='object')settings=d.settings;session=null;persist();refreshSubjects();renderNav();if(curView==='admin')renderAdmin();toast('تمت الاستعادة بنجاح')})}catch(_){toast('الملف غير صالح','err')}};rd.readAsText(f);inp.value=''}
+if(Array.isArray(d.users))users=d.users;if(Array.isArray(d.videos))videos=d.videos;if(Array.isArray(d.exams))exams=d.exams;if(Array.isArray(d.payments))payments=d.payments;if(Array.isArray(d.results))results=d.results;if(Array.isArray(d.comments))comments=d.comments;if(Array.isArray(d.notifications))notifications=d.notifications;if(Array.isArray(d.resets))resets=d.resets;if(Array.isArray(d.lives))lives=d.lives;if(Array.isArray(d.posts))posts=d.posts;if(d.settings&&typeof d.settings==='object')settings=d.settings;session=null;persist();refreshSubjects();renderNav();if(curView==='admin')renderAdmin();toast('تمت الاستعادة بنجاح')})}catch(_){toast('الملف غير صالح','err')}};rd.readAsText(f);inp.value=''}
 
 function approvePay(id){var p=null;for(var i=0;i<payments.length;i++){if(payments[i].id===id){p=payments[i];break}}if(!p)return;
 p.status='approved';
 var u=null;for(var j=0;j<users.length;j++){if(users[j].id===p.uid){u=users[j];break}}
 var msg='تم قبول دفعة '+p.uname;
-/* لو الدفعة مربوطة بحصة مدفوعة → افتحها لحساب الطالب */
 if(u){var lesson=null;
 if(p.lessonId){for(var k=0;k<videos.length;k++){if(videos[k].id===p.lessonId){lesson=videos[k];break}}}
 if(!lesson)lesson=findVidByTitle(p.subject);
@@ -1169,21 +1308,26 @@ renderNav();toast('تم رفض دفعة '+p.uname,'warn');closeModal();renderAdm
 function delPay(id){confirmDlg('حذف الدفعة','هتتحذف نهائيًا.','احذف').then(function(ok){if(!ok)return;var p=null;for(var i=0;i<payments.length;i++){if(payments[i].id===id){p=payments[i];break}}if(p&&(p.mediaPath||p.mediaKey))mediaDelPath(p.mediaPath||p.mediaKey);payments=payments.filter(function(x){return x.id!==id});persist(['payments']);renderNav();renderAdminTab();toast('تم حذف الدفعة','warn')})}
 function approveTeacher(id){var t=null;for(var i=0;i<users.length;i++){if(users[i].id===id){t=users[i];break}}if(!t)return;
 if(!t.idURL&&!t.idKey){toast('مفيش صورة بطاقة مرفوعة — الطلب ناقص','err');return}
-t.approved=true;persist(['users']);notify(t.id,'مبروك! تم قبولك كمدرّس — تقدر ترفع حصصك دلوقتي','ok');renderNav();toast('تم قبول المدرّس '+t.name);closeModal();renderAdminTab()}
+t.approved=true;persist(['users']);notify(t.id,'مبروك! تم قبولك كمدرّس — تقدر ترفع حصصك وتبث مباشر وتنشر دلوقتي','ok');renderNav();toast('تم قبول المدرّس '+t.name);closeModal();renderAdminTab()}
 function rejectTeacher(id){var t=null;for(var i=0;i<users.length;i++){if(users[i].id===id){t=users[i];break}}if(!t)return;
 confirmDlg('رفض طلب المدرّس','هيتم حذف حساب «'+t.name+'» مع كل محتواه.','ارفض واحذف').then(function(ok){if(!ok)return;
 if(t.idPath||t.idKey)mediaDelPath(t.idPath||t.idKey);
 videos.filter(function(v){return v.author===id}).forEach(function(v){[v.mediaPath,v.coverPath,v.attachPath,v.mediaKey,v.coverKey,v.attachKey].forEach(function(p){if(p)mediaDelPath(p)})});
-videos=videos.filter(function(v){return v.author!==id});exams=exams.filter(function(e){return e.author!==id});
-users=users.filter(function(x){return x.id!==id});persist(['users','videos','exams']);renderNav();renderAdminTab();toast('تم الرفض والحذف','warn')})}
+videos=videos.filter(function(v){return v.author!==id});exams=exams.filter(function(e){return e.author!==id});lives=lives.filter(function(l){return l.author!==id});posts=posts.filter(function(p){return p.author!==id});
+users=users.filter(function(x){return x.id!==id});persist(['users','videos','exams','lives','posts']);renderNav();renderAdminTab();toast('تم الرفض والحذف','warn')})}
 function adminSetPass(uidT){var u=null;for(var i=0;i<users.length;i++){if(users[i].id===uidT){u=users[i];break}}if(!u)return;
 var b=openModal('<div class="m-head"><h3>تعيين باس جديد: '+esc(u.name)+'</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div><form id="spf" class="form"><label>كلمة المرور الجديدة<input id="sp-in" type="text" required minlength="6" dir="ltr" style="text-align:left"></label><button class="btn green w100" type="submit"><i data-lucide="key-round"></i> تعيين وإشعار</button></form>');
 b.querySelector('#spf').onsubmit=function(e){e.preventDefault();var np=qs('#sp-in').value.trim();if(np.length<6){toast('6 أحرف على الأقل','err');return}
-hashPass(np).then(function(h){u.passHash=h;persist(['users']);notify(u.id,'تم تغيير كلمة مرورك — باسك الجديد: '+np,'warn');closeModal();toast('تم التعيين وإشعار الطالب');renderAdminTab()})}}
+hashPass(np).then(function(h){u.passHash=h;persist(['users']);notify(u.id,'تم تغيير كلمة مرورك — باسك الجديد: '+np,'warn');closeModal();toast('تم التعيين وإشعاره');renderAdminTab()})}}
+/* استرداد الباس — الموافقة بتغيره فعليًا مشفّر وإشعار للطالب */
 function approveReset(id){var r=null;for(var i=0;i<resets.length;i++){if(resets[i].id===id){r=resets[i];break}}if(!r)return;
 var u=users.find(function(x){return x.email&&x.email.toLowerCase()===r.email});if(!u){toast('مفيش حساب بالبريد ده','err');return}
-hashPass(r.newpass).then(function(h){u.passHash=h;resets=resets.filter(function(x){return x.id!==id});persist(['users','resets']);notify(u.id,'تم قبول طلب تغيير كلمة المرور — باسك الجديد: '+r.newpass,'ok');renderNav();renderAdminTab();toast('تم التغيير وإشعاره')})}
-function rejectReset(id){resets=resets.filter(function(x){return x.id!==id});persist(['resets']);renderAdminTab();toast('تم الرفض','warn')}
+hashPass(r.newpass).then(function(h){u.passHash=h;resets=resets.filter(function(x){return x.id!==id});persist(['users','resets']);notify(u.id,'تم قبول طلبك ✅ كلمة مرورك الجديدة: '+r.newpass+' — غيّرها من صفحة حسابك لما تدخل','ok');renderNav();renderAdminTab();toast('تم تغيير باس '+u.name+' وإشعاره')})}
+function rejectReset(id){var r=null;for(var i=0;i<resets.length;i++){if(resets[i].id===id){r=resets[i];break}}if(!r)return;
+resets=resets.filter(function(x){return x.id!==id});persist(['resets']);
+var u=users.find(function(x){return x.email&&x.email.toLowerCase()===r.email});
+if(u)notify(u.id,'تم رفض طلب تغيير كلمة المرور — راجع الإدارة: 01147414419','warn');
+renderAdminTab();toast('تم الرفض','warn')}
 function adminDeleteUser(id){var u=null;for(var i=0;i<users.length;i++){if(users[i].id===id){u=users[i];break}}if(!u||u.role==='admin')return;
 confirmDlg('حذف الطالب','سيتم حذف «'+u.name+'» وكل بياناته نهائيًا.','احذف').then(function(ok){if(!ok)return;
 payments.filter(function(p){return p.uid===id}).forEach(function(p){if(p.mediaPath||p.mediaKey)mediaDelPath(p.mediaPath||p.mediaKey)});
@@ -1196,6 +1340,10 @@ videos=videos.filter(function(x){return x.id!==id});comments=comments.filter(fun
 users.forEach(function(u){if(u.ownedLessons)u.ownedLessons=u.ownedLessons.filter(function(x){return x!==id});if(u.pendingLessons)u.pendingLessons=u.pendingLessons.filter(function(x){return x!==id})});
 persist(['videos','comments','users']);refreshSubjects();if(cb)cb();toast('تم حذف الحصة','warn')})}
 function delExam(id,cb){confirmDlg('حذف الامتحان','هيتم الحذف مع كل النتائج.','احذف').then(function(ok){if(!ok)return;exams=exams.filter(function(e){return e.id!==id});results=results.filter(function(r){return r.eid!==id});persist(['exams','results']);refreshSubjects();if(cb)cb();toast('تم حذف الامتحان','warn')})}
+function delPost(id){var p=posts.find(function(x){return x.id===id});if(!p)return;var u=me();if(!u)return;
+if(u.role!=='admin'&&p.author!==u.id){toast('مش منشورك','warn');return}
+if(p.imgPath||p.imgKey)mediaDelPath(p.imgPath||p.imgKey);
+posts=posts.filter(function(x){return x.id!==id});persist(['posts']);toast('تم حذف المنشور','warn');if(curView==='news')renderNews();if(curView==='teach')renderTeach()}
 
 function bindFileLabel(inpId,nameId,defHTML){var inp=qs('#'+inpId),lab=qs('#'+nameId);if(!inp||!lab)return;
 inp.addEventListener('change',function(){var f=inp.files[0];lab.innerHTML=f?esc(f.name)+'<small>'+(f.size/1048576).toFixed(1)+' ميجا — جاهز للرفع</small>':defHTML})}
@@ -1205,6 +1353,7 @@ var b=openModal('<div class="m-head"><h3>'+(isEdit?'تعديل الحصة':'إض
 '<form id="vf" class="form">'+
 '<label>عنوان الحصة *<input name="title" required value="'+esc(v?v.title:'')+'" placeholder="مثال: اشتقاق الدوال"></label>'+
 '<label>المادة *<input name="subject" required list="dl-subj" value="'+esc(v?v.subject:'')+'" placeholder="مثال: رياضيات"></label>'+
+'<label>الصف المستهدف *<select name="grade" required>'+gradeOpts(v?v.grade:'الكل')+'</select></label>'+
 '<label>سعر الحصة بالجنيه * (اكتب 0 = مجانية)<input name="price" type="number" min="0" required inputmode="numeric" value="'+(v&&typeof v.price==='number'?v.price:'')+'" placeholder="مثال: 150"></label>'+
 '<label>وصف مختصر<textarea name="desc" rows="2">'+esc(v?(v.desc||''):'')+'</textarea></label>'+
 '<div class="radio-row">'+
@@ -1215,7 +1364,7 @@ var b=openModal('<div class="m-head"><h3>'+(isEdit?'تعديل الحصة':'إض
 '<label id="vf-file-field" class="file-drop" style="display:'+(hasFile?'flex':'none')+'"><input type="file" id="vf-file" accept="video/*"><i data-lucide="file-video"></i><span class="fn" id="vf-file-name">'+(hasFile?'الفيديو الحالي محفوظ ✅<small>اختار جديد للاستبدال</small>':'اختر ملف فيديو من جهازك<small>MP4 / WebM — أي حجم</small>')+'</span></label>'+
 '<label class="file-drop"><input type="file" id="vf-cover" accept="image/*"><i data-lucide="image"></i><span class="fn" id="vf-cover-name">'+(v&&(v.coverURL||v.coverKey)?'صورة الغلاف محفوظة ✅<small>اختار جديد للاستبدال</small>':'صورة غلاف (اختياري)<small>أي مقاس</small>')+'</span></label>'+
 '<label class="file-drop"><input type="file" id="vf-att" accept=".pdf,.doc,.docx,.ppt,.pptx,.zip"><i data-lucide="paperclip"></i><span class="fn" id="vf-att-name">'+(v&&(v.attachURL||v.attachKey)?'المرفق محفوظ ✅<small>اختار جديد للاستبدال</small>':'ملف مرفق (اختياري)<small>PDF / Word / ZIP</small>')+'</span></label>'+
-'<div class="form-note"><i data-lucide="tag"></i> لو السعر أكبر من صفر → الطالب لازم يدفع ثمنها وتراجع الإدارة الدفعة. لو صفر → مجانية للجميع.</div>'+
+'<div class="form-note"><i data-lucide="tag"></i> الحصة هتظهر بس لطلاب الصف المختار. لو السعر أكبر من صفر → الطالب لازم يدفع ثمنها وتراجع الإدارة الدفعة. لو صفر → مجانية.</div>'+
 '<div id="vf-prog" class="form-note vf-prog"></div>'+
 '<button class="btn green w100" type="submit" id="vf-btn"><i data-lucide="upload"></i> '+(isEdit?'حفظ التعديلات':'نشر الحصة')+'</button>'+
 '</form>','wide');
@@ -1223,7 +1372,7 @@ bindFileLabel('vf-file','vf-file-name',hasFile?'الفيديو الحالي مح
 bindFileLabel('vf-cover','vf-cover-name','صورة غلاف (اختياري)<small>أي مقاس</small>');
 bindFileLabel('vf-att','vf-att-name','ملف مرفق (اختياري)<small>PDF / Word / ZIP</small>');
 b.querySelector('#vf').onsubmit=function(e){e.preventDefault();var fd=new FormData(e.target);var u=me();var mode=fd.get('vsrc');var url=String(fd.get('url')||'').trim();
-var vidFile=qs('#vf-file').files[0];var coverF=qs('#vf-cover').files[0];var attF=qs('#vf-att').files[0];var price=+fd.get('price')||0;
+var vidFile=qs('#vf-file').files[0];var coverF=qs('#vf-cover').files[0];var attF=qs('#vf-att').files[0];var price=+fd.get('price')||0;var grade=String(fd.get('grade')||'الكل');
 if(price<0){toast('السعر مش ممكن يكون بالسالب','err');return}
 if(mode==='file'&&!vidFile&&!hasFile){toast('اختر ملف الفيديو','err');return}
 if(mode==='url'&&!url&&!(v&&v.url)){toast('ضع رابط الفيديو','err');return}
@@ -1231,7 +1380,7 @@ var btn=qs('#vf-btn');var progEl=qs('#vf-prog');
 function prog(pct){progEl.style.display='flex';progEl.textContent='جاري الرفع: '+Math.round(pct*100)+'% — سيبك الصفحة مفتوحة'}
 btn.disabled=true;
 var base=isEdit?v:{id:uid(),author:u.id,created:Date.now()};
-base.title=String(fd.get('title')||'').trim();base.subject=String(fd.get('subject')||'').trim();base.price=price;base.desc=String(fd.get('desc')||'').trim();
+base.title=String(fd.get('title')||'').trim();base.subject=String(fd.get('subject')||'').trim();base.price=price;base.grade=grade;base.desc=String(fd.get('desc')||'').trim();
 if(mode==='url'&&url){base.url=url;base.storage='url'}
 var chain=Promise.resolve();
 if(vidFile){chain=chain.then(function(){return mediaPut('vids/'+base.id,vidFile,prog).then(function(r){
@@ -1246,7 +1395,7 @@ if(attF){chain=chain.then(function(){return mediaPut('atts/'+base.id,attF).then(
 if(base.attachPath)mediaDelPath(base.attachPath);if(base.attachKey)mediaDelPath(base.attachKey);
 if(r.url){base.attachURL=r.url;base.attachPath=r.path;base.attachName=attF.name;delete base.attachKey}else{base.attachKey=r.path;base.attachName=attF.name;delete base.attachURL;delete base.attachPath}})})}
 chain.then(function(){
-if(!isEdit){videos.unshift(base);notifyStudents(base.price>0?'حصة جديدة مدفوعة: «'+base.title+'» بسعر '+base.price+' ج — ادفع لفتحها':'حصة جديدة مجانية: «'+base.title+'»','ok')}
+if(!isEdit){videos.unshift(base);notifyGrade(base.grade,base.price>0?'حصة جديدة مدفوعة: «'+base.title+'» بسعر '+base.price+' ج':'حصة جديدة مجانية: «'+base.title+'»','ok')}
 persist(['videos']);refreshSubjects();closeModal();toast(isEdit?'تم حفظ التعديلات':'تم نشر الحصة بنجاح');if(cb)cb()
 }).catch(function(){btn.disabled=false;progEl.style.display='none';toast('فشل رفع الملفات — تأكد من الإنترنت','err')})}}
 function downloadAttach(id){var v=findVid(id);if(!v)return;
@@ -1258,8 +1407,10 @@ var bq=[];
 function openExamBuilder(cb,editId){var ex=editId?exams.find(function(e){return e.id===editId}):null;var isEdit=!!ex;
 bq=isEdit?JSON.parse(JSON.stringify(ex.questions)):[{q:'',o:['','','',''],c:0}];
 var b=openModal('<div class="m-head"><h3>'+(isEdit?'تعديل الامتحان':'إنشاء امتحان جديد')+'</h3><button class="m-x" onclick="closeModal()"><i data-lucide="x"></i></button></div>'+
-'<form id="xf" class="form"><div class="two"><label>عنوان الامتحان *<input name="title" required value="'+esc(ex?ex.title:'')+'" placeholder="امتحان الفصل الأول"></label><label>المادة *<input name="subject" required list="dl-subj" value="'+esc(ex?ex.subject:'')+'" placeholder="مثال: فيزياء"></label></div><div class="two"><label>المدة (دقيقة)<input name="dur" type="number" min="1" value="'+(ex?ex.dur:10)+'" inputmode="numeric"></label>'+(coinsOn()?'<label>مكافأة الكوينز<input name="reward" type="number" min="1" value="'+(ex?ex.reward:50)+'" inputmode="numeric"></label>':'<label style="opacity:.55;pointer-events:none">مكافأة (معطّل)<input type="number" value="0" disabled></label>')+'</div>'+
-'<div class="form-note"><i data-lucide="shield-check"></i> كل امتحان بيشتغل تلقائيًا بنظام المراقبة ضد الغش.</div>'+
+'<form id="xf" class="form"><div class="two"><label>عنوان الامتحان *<input name="title" required value="'+esc(ex?ex.title:'')+'" placeholder="امتحان الفصل الأول"></label><label>المادة *<input name="subject" required list="dl-subj" value="'+esc(ex?ex.subject:'')+'" placeholder="مثال: فيزياء"></label></div>'+
+'<label>الصف المستهدف *<select name="grade" required>'+gradeOpts(ex?ex.grade:'الكل')+'</select></label>'+
+'<div class="two"><label>المدة (دقيقة)<input name="dur" type="number" min="1" value="'+(ex?ex.dur:10)+'" inputmode="numeric"></label>'+(coinsOn()?'<label>مكافأة الكوينز<input name="reward" type="number" min="1" value="'+(ex?ex.reward:50)+'" inputmode="numeric"></label>':'<label style="opacity:.55;pointer-events:none">مكافأة (معطّل)<input type="number" value="0" disabled></label>')+'</div>'+
+'<div class="form-note"><i data-lucide="shield-check"></i> كل امتحان بيشتغل تلقائيًا بنظام المراقبة ضد الغش، وهيبان بس لطلاب الصف المختار.</div>'+
 '<div id="bq-list"></div>'+
 '<button type="button" class="btn ghost sm" onclick="bq.push({q:\'\',o:[\'\',\'\',\'\',\'\'],c:0});renderBQ()"><i data-lucide="plus"></i> إضافة سؤال</button>'+
 '<button class="btn green w100" type="submit"><i data-lucide="check"></i> '+(isEdit?'حفظ التعديلات':'حفظ الامتحان')+'</button>'+
@@ -1269,9 +1420,9 @@ b.querySelector('#xf').onsubmit=function(e){e.preventDefault();
 if(!bq.length){toast('أضف سؤالًا واحدًا على الأقل','err');return}
 for(var i=0;i<bq.length;i++){var q=bq[i];if(!q.q.trim()){toast('السؤال '+(i+1)+': اكتب نص السؤال','err');return}if(q.o.some(function(o){return!o.trim()})){toast('السؤال '+(i+1)+': أكمل كل الاختيارات','err');return}}
 var fd=new FormData(e.target);var u=me();
-var payload={title:String(fd.get('title')||'').trim(),subject:String(fd.get('subject')||'').trim(),dur:Math.max(1,+fd.get('dur')||10),reward:coinsOn()?Math.max(1,+fd.get('reward')||50):0,questions:bq.map(function(q){return{q:q.q.trim(),o:q.o.map(function(o){return o.trim()}),c:q.c}})};
+var payload={title:String(fd.get('title')||'').trim(),subject:String(fd.get('subject')||'').trim(),grade:String(fd.get('grade')||'الكل'),dur:Math.max(1,+fd.get('dur')||10),reward:coinsOn()?Math.max(1,+fd.get('reward')||50):0,questions:bq.map(function(q){return{q:q.q.trim(),o:q.o.map(function(o){return o.trim()}),c:q.c}})};
 if(isEdit){for(var k in payload){ex[k]=payload[k]}toast('تم حفظ تعديلات الامتحان')}
-else{exams.unshift({id:uid(),author:u.id,created:Date.now(),title:payload.title,subject:payload.subject,dur:payload.dur,reward:payload.reward,questions:payload.questions});notifyStudents('امتحان جديد: «'+payload.title+'» في مادة '+payload.subject,'info');toast('تم حفظ الامتحان')}
+else{exams.unshift({id:uid(),author:u.id,created:Date.now(),title:payload.title,subject:payload.subject,grade:payload.grade,dur:payload.dur,reward:payload.reward,questions:payload.questions});notifyGrade(payload.grade,'امتحان جديد: «'+payload.title+'» في مادة '+payload.subject+' — جاهز تبدأ','info');toast('تم حفظ الامتحان')}
 persist(['exams']);refreshSubjects();closeModal();if(cb)cb()}}
 function renderBQ(){var box=qs('#bq-list');if(!box)return;
 box.innerHTML=bq.map(function(q,i){var h='<div class="qedit"><div class="qe-head"><b>السؤال '+(i+1)+'</b>'+(bq.length>1?'<button type="button" class="ico-btn danger" style="width:36px;height:36px" onclick="bq.splice('+i+',1);renderBQ()"><i data-lucide="trash-2"></i></button>':'')+'</div><input type="text" value="'+esc(q.q)+'" oninput="bq['+i+'].q=this.value" placeholder="نص السؤال…">';
@@ -1285,27 +1436,29 @@ var AI_INTENTS=[
 {k:['كوين عندي','رصيدي','كم كوين','كام كوين'],a:function(){if(!coinsOn())return'نظام الكوينز معطّل حاليًا من الإدارة.';var u=me();return u?'رصيدك الحالي '+(u.coins||0)+' كوين.':'سجّل دخولك الأول وهقولك رصيدك.'}},
 {k:['نتيجتي','نتيجة الامتحان','درجتي'],a:function(){var u=me();if(!u)return'سجّل دخولك الأول.';var rs=results.filter(function(r){return r.uid===u.id});if(!rs.length)return'لسه ما حلّيتش أي امتحان — ابدأ دلوقتي!';return'آخر نتايجك:\n'+rs.slice(0,5).map(function(r){return'• '+r.etitle+': '+(r.disq?'ملغي':r.score+'%')}).join('\n')}},
 {k:['سلام','هلا','أهلا','اهلا','مرحبا','هاي','ازيك','إزيك','صباح','مساء'],a:function(){var u=me();return'أهلاً'+(u?' يا '+u.name.split(' ')[0]:'')+' أنا هنا لخدمتك.\nأساعدك في تنظيم مذاكرتك وأساليب الحفظ والتركيز بس.\nالقوانين والحلول مصدرها حصص مستر أحمد — مش أنا.'}},
-{k:['حساب جديد','اعمل حساب','إنشاء حساب','سجل','تسجيل'],a:'خطوات إنشاء الحساب:\n1. اضغط زر «حساب جديد».\n2. اكتب اسمك وبريدك وكلمة مرور.\n3. اختار «طالب» واضغط إنشاء.\nمهم: الحسابين كحد أقصى على كل جهاز.'},
-{k:['مش قادر ادخل','نسيت الباس','كلمة المرور'],a:'لو نسيت كلمة المرور:\n• من شاشة الدخول اضغط «نسيت كلمة المرور؟».\n• اكتب بريدك والباس الجديد — الإدارة تراجع وتوافق.\nولأي مشكلة: 01147414419'},
+{k:['حساب جديد','اعمل حساب','إنشاء حساب','سجل','تسجيل'],a:'خطوات إنشاء الحساب:\n1. اضغط زر «حساب جديد».\n2. اكتب اسمك وبريدك وكلمة مرور واختار صفك الدراسي.\n3. اختار «طالب» واضغط إنشاء.\nمهم: الحسابين كحد أقصى على كل جهاز.'},
+{k:['مش قادر ادخل','نسيت الباس','كلمة المرور'],a:'لو نسيت كلمة المرور:\n• من شاشة الدخول اضغط «نسيت كلمة المرور؟».\n• اكتب بريدك والباس الجديد — الإدارة تراجع وتوافق، ويوصلك إشعار بالباس الجديد.\nولأي مشكلة: 01147414419'},
 {k:['دفع','ادفع','تحويل','فيزا','محفظة','فلوس','اشتراك','ازاي ادفع','سعر','كام','اشتري','شراء'],a:'طريقة شراء الحصص:\n1. لما تدوس على حصة مدفوعة بيظهر لك طلب شراء بالسعر.\n2. حوّل المبلغ على: 01147414419.\n3. من صفحة «الدفعات»: اسم الحصة والمبلغ بييجوا جاهزين — ارفع صورة الإيصال بس.\n4. بعد موافقة الإدارة الحصة بتفتح لحسابك فورًا وإشعار.\nلأي مشكلة: +20 11 47414419'},
+{k:['بث مباشر','بث','لايف','live'],a:function(){var u=me();if(!u)return'سجّل الدخول لمتابعة البث المباشر.';var act=activeLive().filter(function(l){return gradeOK(l)});return act.length?'في بث مباشر دلوقتي! 🎥\nافتحه من صفحة «البث المباشر» في القائمة فوق أو من الشارة الحمراء في الرئيسية.\nالبث المتاح ليك: '+act.map(function(l){return'«'+l.title+'»'}).join('، '):'مفيش بث مباشر دلوقتي — لما المدرس يبدأ هتلاقي شارة حمراء في الرئيسية وصفحة البث.'}},
+{k:['منشور','اخبار','أخبار','اعلان','إعلان','news'],a:'المنشورات والإعلانات بتلاقيها في صفحة «الأخبار» في القائمة فوق — كل اللي المدرس بينزله لصفك: إعلانات، واجبات، ملخصات. وبيوصلك إشعار مع كل منشور جديد.'},
 {k:['مراقبة','غش','نسخ','مخالفة','بيكشف'],a:'نظام المراقبة:\n• الامتحان بيفتح ملء الشاشة — الخروج مخالفة.\n• النسخ واللصق والكليك يمين ممنوع.\n• كل مخالفة بتتسجل بالتوقيت والإدارة بتشوف السجل.\n• 3 مخالفات = إلغاء الامتحان.'},
 {k:['قبل الامتحان','ليلة الامتحان','مراجعة نهائية'],a:'قائمة ما قبل الامتحان:\n1. راجع ملخصاتك وحصص المادة.\n2. حل امتحانات سابقة بمؤقّت.\n3. نام 7-8 ساعات.\n4. فطار خفيف ووصل بدري.\n5. ابدأ بالأسئلة اللي عارفها.'},
 {k:['بومودورو','استراحة','تقسيم الوقت'],a:'تقنية بومودورو:\n• 25 دقيقة تركيز كامل.\n• 5 دقايق راحة.\n• بعد 4 جلسات، خد راحة 20-30 دقيقة.'},
 {k:['حفظ','احفظ','تسميع'],a:'أقوى 3 طرق للحفظ:\n1. التسميع النشط بصوت عالي.\n2. التكرار المتباعد (يوم، 3 أيام، أسبوع).\n3. البطاقات التعليمية.\nلازم تختبر نفسك مش تقرأ بس!'},
 {k:['مذاكرة','ادرس','أذاكر','نصيحة','نصايح','تركيز','تشتت'],a:'خطة مذاكرة ناجحة:\n1. حدد هدف يومي صغير وواضح.\n2. ذاكر بالفهم ثم لخّص بكلامك.\n3. اختبر نفسك بالأسئلة (Active Recall).\n4. ذاكر الصعب في وقت نشاطك الأعلى.\n5. كافئ نفسك بعد كل جلسة.'},
-{k:['مش بيفتح','مش شغال','مشكلة تقنية','عطل'],a:'حلول المشاكل التقنية:\n• الفيديو مش بيفتح: حدّث الصفحة وتأكد من الإنترنت.\n• الحصة مدفوعة: لازم تدفع ثمنها وتنتظر موافقة الإدارة.\n• لو المشكلة مستمرة: 01147414419'},
+{k:['مش بيفتح','مش شغال','مشكلة تقنية','عطل'],a:'حلول المشاكل التقنية:\n• الفيديو مش بيفتح: حدّث الصفحة وتأكد من الإنترنت.\n• الحصة مدفوعة: لازم تدفع ثمنها وتنتظر موافقة الإدارة.\n• البث مش بيفتح: اتأكد إن البث لسه شغّال من صفحة «البث المباشر».\n• لو المشكلة مستمرة: 01147414419'},
 {k:['تواصل','رقم','اتصل','واتساب','دعم','الادارة','الإدارة'],a:'تواصل معنا:\n• تليفون / واتساب: +20 11 47414419'},
 {k:['مين انت','من انت','عن المنصة','مستر احمد','منصة','البنا'],a:'أنا «فتحي بوت» — مساعد ذكي في منصة مستر أحمد فتحي البنا.\nوظيفتي تنظيم مذاكرتك بس — الحلول والقوانين مصدرها حصص مستر أحمد.\nمبتغشّش، وامتحن بنفسك.'},
 {k:['زهقت','تعبت','محبط','خايف','قلق'],a:'اسمع مني: الإحساس ده طبيعي وبيحصل لأفضل الطلاب.\n• خد استراحة 15 دقيقة حقيقية.\n• رجع ذاكر 25 دقيقة بس على أصغر جزء.\nأنت أقوى من اللي فات!'},
 {k:['شكرا','متشكر','تسلم'],a:'العفو! دي واجبي.\nبالتوفيق في دراستك!'}];
-var AI_FALLBACK='مش متأكد إنني فهمت سؤالك.\nأساعدك في:\n• تنظيم المذاكرة وأساليب الحفظ\n• طريقة شراء الحصص والدفع\n• معلومات الامتحانات والمراقبة\nالحلول والقوانين هتلاقيها في حصص مستر أحمد.';
-function aiWelcome(){var u=me();return'أهلاً'+(u?' يا '+u.name.split(' ')[0]:'')+' أنا «فتحي بوت».\nأساعدك في:\n• تنظيم المذاكرة وأساليب الحفظ والتركيز\n• طريقة شراء الحصص والدفع\n• معلومات الامتحانات والمراقبة\n⚠️ ملحوظة: أنا مش بحل مسائل ولا واجبات ولا أعطي حلول جاهزة نهائيًا — ده شغل الحصص عند مستر أحمد.'}
+var AI_FALLBACK='مش متأكد إنني فهمت سؤالك.\nأساعدك في:\n• تنظيم المذاكرة وأساليب الحفظ\n• طريقة شراء الحصص والدفع\n• البث المباشر والمنشورات\n• معلومات الامتحانات والمراقبة\nالحلول والقوانين هتلاقيها في حصص مستر أحمد.';
+function aiWelcome(){var u=me();return'أهلاً'+(u?' يا '+u.name.split(' ')[0]:'')+' أنا «فتحي بوت».\nأساعدك في:\n• تنظيم المذاكرة وأساليب الحفظ والتركيز\n• طريقة شراء الحصص والدفع\n• البث المباشر والمنشورات\n• معلومات الامتحانات والمراقبة\n⚠️ ملحوظة: أنا مش بحل مسائل ولا واجبات ولا أعطي حلول جاهزة نهائيًا — ده شغل الحصص عند مستر أحمد.'}
 var aiBooted=false;
 function aiToggle(){if(ER&&!ER.ended){toast('المساعد مقفول أثناء الامتحان','warn');return}var p=qs('#ai-panel');p.classList.toggle('open');
 if(p.classList.contains('open')&&!aiBooted){aiBoot();aiBooted=true}
 if(p.classList.contains('open')){var inp=qs('#ai-input');if(inp)inp.focus()}}
 function aiReset(){aiBooted=false;qs('#ai-msgs').innerHTML='';if(qs('#ai-panel').classList.contains('open')){aiBoot();aiBooted=true}}
-function aiBoot(){var chips=['إزاي أشتري حصة؟','إزاي أدفع؟','نصيحة مذاكرة','قبل الامتحان'];if(coinsOn())chips.push('كم كوين عندي؟');chips.push('تواصل معنا');
+function aiBoot(){var chips=['إزاي أشتري حصة؟','البث المباشر','المنشورات','نصيحة مذاكرة'];if(coinsOn())chips.push('كم كوين عندي؟');chips.push('تواصل معنا');
 qs('#ai-chips').innerHTML=chips.map(function(c){return'<button class="ai-chip" onclick="aiQuick(this.textContent)">'+c+'</button>'}).join('');aiPush('bot',aiWelcome())}
 function aiQuick(t){aiUserSend(t)}
 function aiPush(role,text){var box=qs('#ai-msgs');var el=document.createElement('div');el.className='msg '+role;el.textContent=text;var t=document.createElement('span');t.className='t';t.textContent=new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});el.appendChild(t);box.appendChild(el);box.scrollTop=box.scrollHeight}
@@ -1314,7 +1467,6 @@ if(on){var el=document.createElement('div');el.className='typing';el.innerHTML='
 function aiUserSend(forced){var inp=qs('#ai-input');var txt=(forced||inp.value).trim();if(!txt)return;if(!forced)inp.value='';
 aiPush('me',txt);aiTyping(true);setTimeout(function(){aiTyping(false);aiPush('bot',aiReply(txt))},550+Math.random()*500)}
 function aiReply(qraw){var q=qraw.toLowerCase().trim();
-/* حاجز صارم: أي طلب حل مسألة = رفض حاسم */
 var solveWords=['حل','احل','أحل','حلل','حلها','حللي','حل ليا','حل واجب','واجب','تكليف','مسالة','مسألة','مسئلة','سؤال ده','السؤال ده','اسئلة','أسئلة','تمرين','نموذج','إجابة','اجابة','جيب','sin','cos','tan'];
 var forK=['ازاي احل','كيف احل','اعملها','ابعت الحل','احسب','أحسب','احسبلي','ناتج','مجموع','طرح','ضرب','قسمة','جذمور','مميز','اشتق','اشتقاق','بسّط','بسط','فك'];
 var isSolve=false;
@@ -1323,7 +1475,7 @@ if(!isSolve){for(var fi=0;fi<forK.length;fi++){if(q.indexOf(forK[fi])!==-1){isSo
 if(/\d/.test(q)&&/[+\-*/×÷^=√²]/.test(q))isSolve=true;
 var digits=(q.match(/\d/g)||[]).length;
 if(digits>=3&&/(كام|=|\?|؟)/.test(q))isSolve=true;
-if(isSolve){return'معلش، أنا مصمم مبحلش مسائل ولا واجبات ولا أعطي حلول جاهزة نهائيًا — دي سياسة المنصة عشان تتعلم بجد. 😊\nالأفضل ليك:\n• رجع لحصة مستر أحمد الخاصة بالدرس ده وشوف الأمثلة المحلولة.\n• حُل المسألة بنفسك خطوة بخطوة.\n• لو وقفت، اسأل في تعليقات الحصة وهيرد عليك المدرس.\nكده هتفهم وتنجح فعلًا 💪'}
+if(isSolve){return'معلش، أنا مصمم مبحلش مسائل ولا واجبات ولا أعطي حلول جاهزة نهائيًا — دي سياسة المنصة عشان تتعلم بجد. 😊\nالأفضل ليك:\n• رجع لحصة مستر أحمد الخاصة بالدرس ده وشوف الأمثلة المحلولة.\n• حُل المسألة بنفسك خطوة بخطوة.\n• لو وقفت، اسأل في تعليقات الحصة أو اسأل المدرس في البث المباشر.\nكده هتفهم وتنجح فعلًا 💪'}
 var best=null,bs=0;
 for(var i=0;i<AI_INTENTS.length;i++){var it=AI_INTENTS[i],s=0;
 for(var j=0;j<it.k.length;j++){if(q.indexOf(it.k[j])!==-1)s+=(it.k[j].length>=6?2:1)}
@@ -1331,7 +1483,6 @@ if(s>bs){bs=s;best=it}}
 if(best&&bs>0){return typeof best.a==='function'?best.a():best.a}
 return AI_FALLBACK}
 
-/* السحابة */
 var bootDone=false;
 function loadScriptSeq(urls){return urls.reduce(function(p,url){return p.then(function(){return new Promise(function(res,rej){var s=document.createElement('script');s.src=url;s.onload=res;s.onerror=function(){rej(new Error('load'))};document.head.appendChild(s)})})},Promise.resolve())}
 function watchCloud(){var got=0;var failTimer=setTimeout(function(){if(!bootDone){toast('تعذر الاتصال بالسحابة — وضع محلي','warn');CLOUD=false;localBoot()}},10000);
@@ -1341,7 +1492,7 @@ else{if(pendingCols[col])return;window[col]=(d&&d.items)?d.items:[]}
 if(!bootDone){got++;if(got>=ALLCOLS.length){clearTimeout(failTimer);bootDone=true;ensureAdmin().then(function(){refreshSubjects();startApp()})}}
 else remoteUpdate()},function(){if(!bootDone){clearTimeout(failTimer);toast('تعذر الاتصال بالسحابة — وضع محلي','warn');CLOUD=false;localBoot()}})})}
 function remoteUpdate(){refreshSubjects();renderNav();
-if(curView==='videos')applyVideoFilters();else if(curView==='exams')applyExamFilters();else if(curView==='payments')renderPayments();else if(curView==='admin')renderAdminTab();else if(curView==='teach')renderTeach();else if(curView==='home')renderHome();
+if(curView==='videos')applyVideoFilters();else if(curView==='exams')applyExamFilters();else if(curView==='payments')renderPayments();else if(curView==='admin')renderAdminTab();else if(curView==='teach')renderTeach();else if(curView==='home')renderHome();else if(curView==='live')renderLive();else if(curView==='news')renderNews();
 if(openPlayerVid){var v=findVid(openPlayerVid);if(v)renderCmts(v)}}
 function cloudBoot(){var urls=['https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js','https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js','https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js'];
 loadScriptSeq(urls).then(function(){try{firebase.initializeApp(FIREBASE_CONFIG);db=firebase.firestore();if(FIREBASE_CONFIG.storageBucket)storageRef=firebase.storage().ref();watchCloud()}catch(e){toast('إعدادات Firebase غير صحيحة — وضع محلي','warn');CLOUD=false;localBoot()}}).catch(function(){toast('تعذر تحميل السحابة — وضع محلي','warn');CLOUD=false;localBoot()})}
